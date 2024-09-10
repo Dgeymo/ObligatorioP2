@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-
-namespace Dominio.Entidades
+﻿namespace Dominio.Entidades
 {
     public class Administrador : Usuario
     {
@@ -8,7 +6,7 @@ namespace Dominio.Entidades
            string nombre,
            string apellido,
            string email,
-           string password)
+           string password): base(nombre,apellido,email,password)
         {
             Id = _ultimoId++;
             Nombre = nombre;
@@ -16,12 +14,9 @@ namespace Dominio.Entidades
             Email = email;
             _password = password;
         }
-
         public override string ToString()
-        {
-            string mensaje = string.Empty;
-            mensaje += $"Id: {Id}\nNombre: {Nombre}\nApellido: {Apellido}\nEmail: {Email}\nRol: {Nombre.GetType()} ";
-            return mensaje;
+        {          
+            return $"Id: {Id}\nNombre: {Nombre}\nApellido: {Apellido}\nEmail: {Email}\nTipo: Administrador";         
         }
     }
 }

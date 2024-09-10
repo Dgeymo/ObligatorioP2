@@ -44,7 +44,7 @@
                 Console.WriteLine("Seleccione una opcion del menú");
                 try
                 {
-                    opcion = int.Parse(Console.ReadLine());
+                    opcion = int.Parse(Console.ReadLine()!);
                     flag = true;
                     if (opcion > opciones) flag = false;
                 }

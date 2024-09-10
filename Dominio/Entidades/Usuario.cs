@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Dominio.Entidades
 {
     public class Usuario
@@ -19,10 +14,17 @@ namespace Dominio.Entidades
         {
             set { _password = value; }
         }
+        public Usuario( string nombre, string apellido, string email, string password)
+        {           
+            Nombre = nombre;
+            Apellido = apellido;
+            Email = email;
+            _password = password;          
+        }
 
-        internal void Validar()
+        public virtual void Validar()
         {
-           
+           //todo:falta Validar
         }
     }
 }

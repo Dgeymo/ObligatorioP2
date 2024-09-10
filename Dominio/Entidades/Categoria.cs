@@ -1,4 +1,5 @@
-﻿namespace Dominio.Entidades
+﻿
+namespace Dominio.Entidades
 {
     public class Categoria
     {
@@ -14,10 +15,12 @@
 
         public override string ToString()
         {
-            string mensaje = string.Empty;
-            mensaje += $"Categoria: {Nombre.ToUpper()}\nDescripción : {Descripcion}\n";
-            return mensaje;
+            return $"Categoria: {Nombre.ToUpper()}\nDescripción : {Descripcion}\n";
         }
 
+        internal void Validar()
+        {
+            if (string.IsNullOrEmpty(Nombre)) throw new Exception("Nombre de la Categoría, sin datos");
+        }
     }
 }

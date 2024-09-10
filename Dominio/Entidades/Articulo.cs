@@ -1,4 +1,5 @@
-﻿namespace Dominio.Entidades
+﻿
+namespace Dominio.Entidades
 {
     public class Articulo
     {
@@ -36,6 +37,11 @@
             }
             mensaje += "\n";
             return mensaje;
+        }
+
+        internal void Validar()
+        {
+            //TODO: falta validar Articulos
         }
     }
 }

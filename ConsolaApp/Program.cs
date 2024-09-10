@@ -10,7 +10,7 @@ namespace ConsolaApp
             try
             {
                 _sistema.Precargas();
-               // _sistema.MostrarPrecargas(); //NO SE DEBE INCLUIR EN PROYECTO FINAL
+                _sistema.MostrarPrecargas(); //NO SE DEBE INCLUIR EN PROYECTO FINAL
                                              // Console.WriteLine(_sistema.MostrarUsuario("Diego")); 
                 Vistas.MenuInicio(); //MENU DEL PROGRAMA
             }

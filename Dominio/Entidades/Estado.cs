@@ -1,21 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Dominio.Entidades
+﻿namespace Dominio.Entidades
 {
-    class Estado
+    public class Estado
     {
         public int Id { get; set; }
         private static int _ultimoId;
         public string Nombre { get; set; }
 
-
-        public Estado()
+        public Estado(string nombre)
         {
             Id = _ultimoId++;
+            Nombre = nombre;
+        }
+        public override string ToString()
+        {
+            return $"Id: {Id}\nNombre: {Nombre}\n";
         }
     }
 }
