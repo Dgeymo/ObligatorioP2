@@ -2,14 +2,14 @@
 
 namespace ConsolaApp
 {
-    internal class Program
+    public class Program
     {
-        static Sistema _sistema = new Sistema();
+      public  static Sistema _sistema = new Sistema();
         static void Main(string[] args)
         {
             try
             {
-                _sistema.Precargas();
+                PreCarga.PreCargas();
                 _sistema.MostrarPrecargas(); //NO SE DEBE INCLUIR EN PROYECTO FINAL
                                              // Console.WriteLine(_sistema.MostrarUsuario("Diego")); 
                 Vistas.MenuInicio(); //MENU DEL PROGRAMA
@@ -18,6 +18,6 @@ namespace ConsolaApp
             {
                 Console.WriteLine(e.Message);
             }
-        }
+        }       
     }
 }

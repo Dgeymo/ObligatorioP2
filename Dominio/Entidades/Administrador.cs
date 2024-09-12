@@ -7,12 +7,7 @@
            string apellido,
            string email,
            string password): base(nombre,apellido,email,password)
-        {
-            Id = _ultimoId++;
-            Nombre = nombre;
-            Apellido = apellido;
-            Email = email;
-            _password = password;
+        {         
         }
         public override string ToString()
         {          

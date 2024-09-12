@@ -10,12 +10,7 @@
            string email,
            string password,
            decimal Billetera) : base(nombre, apellido, email, password)
-        {
-            Id = _ultimoId++;
-            Nombre = nombre;
-            Apellido = apellido;
-            Email = email;
-            _password = password;
+        {          
             saldoBilletera = Billetera;
         }
         public override string ToString()

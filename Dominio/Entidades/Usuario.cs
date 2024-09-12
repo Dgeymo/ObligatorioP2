@@ -1,7 +1,7 @@
 ﻿
 namespace Dominio.Entidades
 {
-    public class Usuario
+    public abstract class Usuario
     {
         public int Id { get; set; }
         public string Nombre { get; set; }
@@ -15,11 +15,12 @@ namespace Dominio.Entidades
             set { _password = value; }
         }
         public Usuario( string nombre, string apellido, string email, string password)
-        {           
+        {
+            Id = _ultimoId++;
             Nombre = nombre;
             Apellido = apellido;
             Email = email;
-            _password = password;          
+            _password = password;           
         }
 
         public virtual void Validar()
