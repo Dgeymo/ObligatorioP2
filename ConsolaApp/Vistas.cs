@@ -14,7 +14,10 @@
             lista.Add(Vistas.MenuUsuario);
             lista.Add(Vistas.MenuAdministracion);
             lista.Add(Vistas.Salir);
+
+            
             lista[opcion]();
+
         }
         static void MenuUsuario()
         {
