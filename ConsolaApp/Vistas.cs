@@ -2,51 +2,58 @@
 {
     public class Vistas
     {
+        private delegate void Parametro1();
+        private static List<Parametro1> lista = new List<Parametro1>();
+
         public static void MenuInicio()
         {
-            //Console.Clear(); //esta comentado para que se vean las precargas           
+            //Console.Clear(); //comentar para ver precargas         
             ImprimirLogo();
-
-            //esta funcion construye los menus en funcion de string que mandemos, pide y verifica la seleccion y devuelve la opcion.
-            //y de ahi derivamos en un switch a que funcion queremos ir con la opcion que devuelve la funcion.
-            int opcion = ConstructorMenu(["Usuario", "Administrador"]);
-            switch (opcion)
-            {
-                case 0:
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("Has salido del sistema...\n-> Presiona cualquier tecla para cerrar esta ventanta");
-                    Console.ForegroundColor = ConsoleColor.White;
-                    break;
-                default:
-                    Console.WriteLine("En construcción...");
-                    break;
-            }
+            int opcion = ConstructorMenu(["Usuario", "Administrador", "Salir"]);
+            lista.Clear();
+            lista.Add(Vistas.MenuUsuario);
+            lista.Add(Vistas.MenuAdministracion);
+            lista.Add(Vistas.Salir);
+            lista[opcion]();
         }
-        private static int ConstructorMenu(string[] opciones)
+        static void MenuUsuario()
         {
-            Console.WriteLine("\t<<Menu PRINCIPAL>>");
+            Console.WriteLine("USUARIO");
+        }
+        static void MenuAdministracion()
+        {
+            Console.WriteLine("ADMINISTRACION");
+        }
+        static void Salir()
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Has salido del sistema...\n-> Presiona cualquier tecla para cerrar esta ventanta");
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+        static int ConstructorMenu(string[] opciones)
+        {
             string menu = string.Empty;
-            for (int i = 0; i < opciones.Length; i++)
+            for (int i = 0; i < opciones.Length - 1; i++)
             {
                 menu += $"\n({i + 1})_{opciones[i]}";
             }
-            menu += "\n(0)_Salir\n";
+            menu += $"\n(0)_{opciones[opciones.Length - 1]}\n";
             Console.WriteLine(menu);
             return SelectorMenu(opciones.Length);
         }
-        private static int SelectorMenu(int opciones)
+        static int SelectorMenu(int opciones)
         {
             int opcion = 0;
             bool flag = false;
             do
             {
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine("Seleccione una opcion del menú");
                 try
                 {
-                    opcion = int.Parse(Console.ReadLine()!);
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine($"Seleccione una opcion del menú");
+                    opcion = int.Parse(Console.ReadLine());
                     flag = true;
-                    if (opcion > opciones) flag = false;
+                    if (opcion > opciones - 1) flag = false;
                 }
                 catch (Exception)
                 {
@@ -55,7 +62,8 @@
                 }
             }
             while (!flag);
-            return opcion;
+            if (opcion == 0) return opciones - 1;
+            return opcion - 1;
         }
         private static void ImprimirLogo()
         {
