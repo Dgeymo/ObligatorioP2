@@ -10,8 +10,7 @@ namespace ConsolaApp
             try
             {
                 PreCarga.PreCargas();
-                _sistema.MostrarPrecargas(); //NO SE DEBE INCLUIR EN PROYECTO FINAL
-                                             // Console.WriteLine(_sistema.MostrarUsuario("Diego")); 
+                //_sistema.MostrarPrecargas(); //NO SE DEBE INCLUIR EN PROYECTO FINAL
                 Vistas.MenuInicio(); //MENU DEL PROGRAMA
             }
             catch (Exception e)

@@ -7,31 +7,101 @@
 
         public static void MenuInicio()
         {
-            //Console.Clear(); //comentar para ver precargas         
+            Console.Clear(); //comentar para ver precargas         
             ImprimirLogo();
             int opcion = ConstructorMenu(["Usuario", "Administrador", "Salir"]);
             lista.Clear();
             lista.Add(Vistas.MenuUsuario);
             lista.Add(Vistas.MenuAdministracion);
             lista.Add(Vistas.Salir);
-
-            
             lista[opcion]();
-
         }
         static void MenuUsuario()
         {
-            Console.WriteLine("USUARIO");
+            EnConstruccion();
         }
         static void MenuAdministracion()
         {
-            Console.WriteLine("ADMINISTRACION");
+            Console.Clear();
+            Console.WriteLine("HERRAMIENTAS ADMINISTRATIVAS");
+            int opcion = ConstructorMenu(["Categorias", "Productos", "Clientes", "Publicaciones", "Volver"]);
+            lista.Clear();
+            lista.Add(Vistas.AdministrarCategorias);
+            lista.Add(Vistas.AdministrarProductos);
+            lista.Add(Vistas.AdministrarClientes);
+            lista.Add(Vistas.AdministrarPublicaciones);
+            lista.Add(Vistas.MenuInicio);
+            lista[opcion]();
         }
+
+        private static void AdministrarPublicaciones()
+        {
+            Console.Clear();
+            Console.WriteLine("ADMINISTRACION DE PUBLICACIONES");
+            int opcion = ConstructorMenu(["Ver publicaciones (VENTAS)", "Ver publicaciones (SUBASTAS)",
+                "Crear nueva publicacion (VENTA)", "Crear nueva publicacion (SUBASTA)",
+                "Administrar publicaciones ABIERTAS","Listar todas las publicaciones", "Volver"]);
+            lista.Clear();
+            lista.Add(Vistas.EnConstruccion);
+            lista.Add(Vistas.EnConstruccion);
+            lista.Add(Vistas.EnConstruccion);
+            lista.Add(Vistas.EnConstruccion);
+            lista.Add(Vistas.EnConstruccion);
+            lista.Add(Vistas.EnConstruccion);
+            lista.Add(Vistas.MenuAdministracion);
+            lista[opcion]();
+        }
+
+        private static void AdministrarClientes()
+        {
+            Console.Clear();
+            Console.WriteLine("ADMINISTRACION DE CLIENTES");
+            int opcion = ConstructorMenu(["Listar clientes", "Volver"]);
+            lista.Clear();
+            lista.Add(Vistas.EnConstruccion);
+            lista.Add(Vistas.MenuAdministracion);
+            lista[opcion]();
+        }
+
+        private static void AdministrarProductos()
+        {
+            Console.Clear();
+            Console.WriteLine("ADMINISTRACION DE PRODUCTOS");
+            int opcion = ConstructorMenu(["Listar productos", "Agregar producto", "Modificar producto",
+                "Volver"]);
+            lista.Clear();
+            lista.Add(Vistas.EnConstruccion);
+            lista.Add(Vistas.EnConstruccion);
+            lista.Add(Vistas.EnConstruccion);
+            lista.Add(Vistas.MenuAdministracion);
+            lista[opcion]();
+        }
+
+        private static void AdministrarCategorias()
+        {
+            Console.Clear();
+            Console.WriteLine("ADMINISTRACION DE CATEGORÍAS");
+            int opcion = ConstructorMenu(["Listar categorías", "Agregar categoría", "Volver"]);
+            lista.Clear();
+            lista.Add(Vistas.EnConstruccion);
+            lista.Add(Vistas.EnConstruccion);
+            lista.Add(Vistas.MenuAdministracion);
+            lista[opcion]();
+        }
+
         static void Salir()
         {
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Has salido del sistema...\n-> Presiona cualquier tecla para cerrar esta ventanta");
             Console.ForegroundColor = ConsoleColor.White;
+        }
+        static void EnConstruccion()
+        {
+            Console.BackgroundColor = ConsoleColor.Red;
+            Console.WriteLine(" EN CONSTRUCCION ");
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.ReadKey();
+            Vistas.MenuInicio();
         }
         static int ConstructorMenu(string[] opciones)
         {
