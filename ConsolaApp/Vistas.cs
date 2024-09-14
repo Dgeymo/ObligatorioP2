@@ -50,11 +50,12 @@ namespace ConsolaApp
             lista.Add(Vistas.MenuAdministracion);
             lista[opcion]();
         }
-
+        
         private static void ListarPublicaciones()
         {
             Console.Clear();
             Console.WriteLine("PUBLICACIONES");
+            string[] opciones = ["Todas las publicaciones", "Ventas", "Subastas", "Volver"];
             int opcion = ConstructorMenu(["Todas las publicaciones", "Ventas", "Subastas", "Volver"]);
             switch (opcion)
             {
