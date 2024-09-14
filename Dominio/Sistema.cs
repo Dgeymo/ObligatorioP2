@@ -47,6 +47,16 @@ namespace Dominio
             nuevaCategoria.Validar();
             _categorias.Add(nuevaCategoria);
         }
+        public List<string> MostrarCategorias()
+        {
+            List<string> listaCategorias = new List<string>();
+            for(int i = 0; i < _categorias.Count; i++)
+            {
+                listaCategorias.Add($"({i + 1}) " + _categorias[i].ToString());
+            }
+
+            return listaCategorias;
+        }
         public void AgregarUsuario(Usuario nuevoUsuario)
         {
             nuevoUsuario.Validar();

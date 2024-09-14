@@ -1,4 +1,6 @@
-﻿namespace ConsolaApp
+﻿using Dominio;
+using Dominio.Entidades;
+namespace ConsolaApp
 {
     public class Vistas
     {
@@ -83,17 +85,58 @@
             Console.WriteLine("ADMINISTRACION DE CATEGORÍAS");
             int opcion = ConstructorMenu(["Listar categorías", "Agregar categoría", "Volver"]);
             lista.Clear();
-            lista.Add(Vistas.EnConstruccion);
-            lista.Add(Vistas.EnConstruccion);
+            lista.Add(Vistas.ListarCategoria);
+            lista.Add(Vistas.AgregarCategoria);
             lista.Add(Vistas.MenuAdministracion);
             lista[opcion]();
         }
+        private static void AgregarCategoria()
+        {
+            bool flag = false;
+            do
+            {
+                try
+                {
+                    Console.Clear();
+                    Console.WriteLine("Ingrese un título para la categoria.");
+                    string titulo = Console.ReadLine();
+                    Console.WriteLine("Ingrese una breve descripción de la categoria.\n(0) Cancelar");
+                    string descripcion = Console.ReadLine();
+                    if (titulo != "0" && descripcion != "0")
+                    {
+                        Categoria nuevaCategoria = new Categoria(titulo, descripcion);
+                        Program._sistema.AgregarCategoria(nuevaCategoria);
+                    }
+                    flag = true;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    Console.ReadKey();
+                }
+            } while (!flag);
+            AdministrarCategorias();
+        }
+        private static void ListarCategoria()
+        {
+            Console.Clear();
+            Console.WriteLine("CATEGORÍAS\n");
+            List<string> lista = Program._sistema.MostrarCategorias();
+            for (int i = 0; i < lista.Count; i++)
+            {
+                Console.WriteLine(lista[i]);
+            }
+            Console.WriteLine("Presione cualquier tecla para volver....");
+            Console.ReadKey();
+            AdministrarCategorias();
+        }
 
-        static void Salir()
+        private static void Salir()
         {
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Has salido del sistema...\n-> Presiona cualquier tecla para cerrar esta ventanta");
             Console.ForegroundColor = ConsoleColor.White;
+            lista.Clear();
         }
         static void EnConstruccion()
         {

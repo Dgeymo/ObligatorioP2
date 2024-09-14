@@ -21,6 +21,7 @@ namespace Dominio.Entidades
         internal void Validar()
         {
             if (string.IsNullOrEmpty(Nombre)) throw new Exception("Nombre de la Categoría, sin datos");
+            if (string.IsNullOrEmpty(Descripcion)) throw new Exception("Decripción de la categoria, sin datos");
         }
     }
 }
