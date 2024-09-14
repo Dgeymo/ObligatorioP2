@@ -57,6 +57,16 @@ namespace Dominio
             return null!;
         }
 
+        public Articulo BuscarArticulo(int idArticulo)
+        {
+            for (int i = 0; i < _articulos.Count; i++)
+            {
+                Articulo unArticulo = _articulos[i];
+                if (unArticulo.Id == idArticulo) return unArticulo;
+            }
+            return null!;
+        }
+
         //Bloque de muestra de listas como strings
         public List<string> MostrarCategorias()
         {
@@ -118,6 +128,18 @@ namespace Dominio
         }
         public void CargarPublicacion(Publicacion publicacion)
         {
+            for (int i = 0; i < publicacion.IdArticulos.Count; i++)
+            {
+                Articulo unArticulo = BuscarArticulo(publicacion.IdArticulos[i]);
+                for (int j = 0; j < _articulos.Count; j++)
+                {
+                    Articulo elArticulo = BuscarArticulo(j);
+                    if (unArticulo != null && unArticulo.Id == elArticulo.Id)
+                    {
+                        publicacion.AgregarArticulo(elArticulo);
+                    }
+                }
+            }
             publicacion.Validar();
             _publicaciones.Add(publicacion);
         }

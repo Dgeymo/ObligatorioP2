@@ -2,7 +2,7 @@
 
 namespace ConsolaApp
 {
-    public  class PreCarga:Program
+    public class PreCarga : Program
     {
         public static void PreCargas()
         {
@@ -97,11 +97,12 @@ namespace ConsolaApp
         }
         private static void PrecargaPublicaciones()
         {
-             _sistema.CargarPublicacion(new Publicacion("Verano en la Playa",
-                _sistema.BuscarEstado("ABIERTA"), 
-                DateTime.Now, 
-                _sistema.BuscarUsuario("dgeymonat84@gmail.com"), 
-                _sistema.BuscarTipo("VENTA"), false));
+            _sistema.CargarPublicacion(new Publicacion("Verano en la Playa",
+               _sistema.BuscarEstado("ABIERTA"),
+               DateTime.Now,
+               _sistema.BuscarUsuario("dgeymonat84@gmail.com"),
+               _sistema.BuscarTipo("VENTA"), false, [4, 6, 9, 45]));
+
         }
     }
 }
