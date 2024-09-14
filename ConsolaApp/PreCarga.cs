@@ -97,12 +97,14 @@ namespace ConsolaApp
         }
         private static void PrecargaPublicaciones()
         {
-            _sistema.CargarPublicacion(new Publicacion("Verano en la Playa",
-               _sistema.BuscarEstado("ABIERTA"),
-               DateTime.Now,
-               _sistema.BuscarUsuario("dgeymonat84@gmail.com"),
+            //VENTAS
+            _sistema.CargarPublicacion(new Publicacion("Verano en la Playa", _sistema.BuscarEstado("ABIERTA"),
+               DateTime.Now, _sistema.BuscarUsuario("dgeymonat84@gmail.com"),
                _sistema.BuscarTipo("VENTA"), false, [4, 6, 9, 45]));
-
+            //SUBASTAS
+            _sistema.CargarPublicacion(new Publicacion("Atardecer en familia", _sistema.BuscarEstado("ABIERTA"),
+               DateTime.Now, _sistema.BuscarUsuario("ernaldo.rodriguez.dev1@gmail.com"),
+               _sistema.BuscarTipo("SUBASTA"), false, [8, 15, 9, 36]));
         }
     }
 }

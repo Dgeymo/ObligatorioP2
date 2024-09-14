@@ -22,7 +22,7 @@ namespace Dominio
                     return unEstado;
                 }
             }
-            throw new Exception("No se encontro un ESTADO de Publicacion que coincida con los existentes.");
+            return null;
         }
         public Tipo BuscarTipo(string tipo)
         {
@@ -35,7 +35,7 @@ namespace Dominio
                     return untipo;
                 }
             }
-            throw new Exception("No se encontro un TIPO de Publicacion que coincida con las existentes.");
+            return null;
         }
         public Usuario BuscarUsuario(string email)
         {
@@ -92,9 +92,9 @@ namespace Dominio
             for (int i = 0; i < _publicaciones.Count; i++)
             {
                 Publicacion unaPublicacion = _publicaciones[i];
-                if (tipo.ToUpper() == "TODOS" || unaPublicacion.Tipo.Nombre == _publicaciones[i].Tipo.Nombre)
+                if (tipo.ToUpper() == "TODOS" || unaPublicacion.Tipo.Nombre == tipo.ToUpper())
                 {
-                    if (estado.ToUpper() == "TODOS" || unaPublicacion.Estado.Nombre == _publicaciones[i].Estado.Nombre)
+                    if (estado.ToUpper() == "TODOS" || unaPublicacion.Estado.Nombre == estado.ToUpper())
                     {
                         publicaciones.Add(unaPublicacion.ToString());
                     }
@@ -102,7 +102,7 @@ namespace Dominio
             }
             return publicaciones;
         }
-        //bloque de muestra de listas como objetos
+        //bloque de muestra de objetos
         public Usuario MostrarUsuario(string Nombre)
         {
             bool existe = false;

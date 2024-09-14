@@ -40,30 +40,58 @@ namespace ConsolaApp
         {
             Console.Clear();
             Console.WriteLine("ADMINISTRACION DE PUBLICACIONES");
-            int opcion = ConstructorMenu(["Ver publicaciones (VENTAS)", "Ver publicaciones (SUBASTAS)",
-                "Crear nueva publicacion (VENTA)", "Crear nueva publicacion (SUBASTA)",
-                "Administrar publicaciones ABIERTAS","Listar todas las publicaciones", "Volver"]);
+            int opcion = ConstructorMenu(["Listar todas las publicaciones", "Crear nueva publicacion (VENTA)", "Crear nueva publicacion (SUBASTA)",
+                "Administrar publicaciones ABIERTAS", "Volver"]);
             lista.Clear();
-            lista.Add(Vistas.VerVentas);
-            lista.Add(Vistas.EnConstruccion);
-            lista.Add(Vistas.EnConstruccion);
+            lista.Add(Vistas.ListarPublicaciones);
             lista.Add(Vistas.EnConstruccion);
             lista.Add(Vistas.EnConstruccion);
             lista.Add(Vistas.EnConstruccion);
             lista.Add(Vistas.MenuAdministracion);
             lista[opcion]();
         }
-        private static void VerVentas()
+
+        private static void ListarPublicaciones()
         {
             Console.Clear();
-            Console.WriteLine("VENTAS");
-            List <string> ventas = Program._sistema.ListaPublicaciones("todos","todos");
+            Console.WriteLine("PUBLICACIONES");
+            int opcion = ConstructorMenu(["Todas las publicaciones", "Ventas", "Subastas", "Volver"]);
+            switch (opcion)
+            {
+                case 0:
+                    VerPublicaciones("Todas las publicaciones", "todos", "todos");
+                    Console.WriteLine("Presione cualquier tecla para continuar...");
+                    Console.ReadKey();
+                    ListarPublicaciones();
+                    break;
+                case 1:
+                    VerPublicaciones("VENTAS", "venta", "todos");
+                    Console.WriteLine("Presione cualquier tecla para continuar...");
+                    Console.ReadKey();
+                    ListarPublicaciones();
+                    break;
+                case 2:
+                    VerPublicaciones("SUBASTAS", "subasta", "todos");
+                    Console.WriteLine("Presione cualquier tecla para continuar...");
+                    Console.ReadKey();
+                    ListarPublicaciones();
+                    break;
+                case 3:
+                    AdministrarPublicaciones();
+                    break;
+                default:
+                    break;
+            }
+        }
+        private static void VerPublicaciones(string titulo, string tipo, string estado)
+        {
+            Console.Clear();
+            Console.WriteLine(titulo);
+            List<string> ventas = Program._sistema.ListaPublicaciones(tipo, estado);
             for (int i = 0; i < ventas.Count; i++)
             {
                 Console.WriteLine(ventas[i]);
             }
-            Console.ReadKey();
-            AdministrarPublicaciones();
         }
 
         private static void AdministrarClientes()
@@ -110,14 +138,17 @@ namespace ConsolaApp
                 try
                 {
                     Console.Clear();
-                    Console.WriteLine("Ingrese un título para la categoria.");
+                    Console.WriteLine("Ingrese un título para la categoria.  (0) Cancelar");
                     string titulo = Console.ReadLine();
-                    Console.WriteLine("Ingrese una breve descripción de la categoria.\n(0) Cancelar");
-                    string descripcion = Console.ReadLine();
-                    if (titulo != "0" && descripcion != "0")
+                    if (titulo != "0")
                     {
-                        Categoria nuevaCategoria = new Categoria(titulo, descripcion);
-                        Program._sistema.AgregarCategoria(nuevaCategoria);
+                        Console.WriteLine("Ingrese una breve descripción de la categoria.  (0) Cancelar");
+                        string descripcion = Console.ReadLine();
+                        if (descripcion != "0")
+                        {
+                            Categoria nuevaCategoria = new Categoria(titulo, descripcion);
+                            Program._sistema.AgregarCategoria(nuevaCategoria);
+                        }
                     }
                     flag = true;
                 }
