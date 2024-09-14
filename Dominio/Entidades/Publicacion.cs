@@ -34,14 +34,27 @@
         public override string ToString()
         {
             string respuesta = string.Empty;
-            respuesta = $"Id: {Id}\nNombre: {Nombre}\nEstado: {Estado}\n Usuario: {Usuario.Nombre} {Usuario.Apellido}\nEstado: {Estado.Nombre}\nFecha Publicación: {FechaPublicacion}";
+            respuesta = $"Id: {Id}\n" +
+                $"Tipo: {Tipo.Nombre}\n" +
+                $"Nombre: {Nombre}\n" +
+                $"Usuario: {Usuario.Nombre} {Usuario.Apellido}\n" +
+                $"Estado: {Estado.Nombre}\n" +
+                $"Fecha Publicación: {FechaPublicacion}";
             if (Estado.Nombre == "Finalizado") respuesta += $"\nFecha Finalizado: {FechaFinalizado}";
             return respuesta;
         }
 
         internal void Validar()
         {
-           //TODO: no implementado
+           if(string.IsNullOrEmpty(Nombre) ||
+                Estado == null ||
+                Usuario == null ||
+                Tipo == null ||
+                string.IsNullOrEmpty(FechaPublicacion.ToString())||
+                string.IsNullOrEmpty(Oferta.ToString())) 
+            {
+                throw new Exception("Datos incorrectos al intentar ingresar la PUBLICACIÓN.");
+            }
         }
     }
 }

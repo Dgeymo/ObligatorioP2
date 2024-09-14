@@ -44,7 +44,7 @@ namespace ConsolaApp
                 "Crear nueva publicacion (VENTA)", "Crear nueva publicacion (SUBASTA)",
                 "Administrar publicaciones ABIERTAS","Listar todas las publicaciones", "Volver"]);
             lista.Clear();
-            lista.Add(Vistas.EnConstruccion);
+            lista.Add(Vistas.VerVentas);
             lista.Add(Vistas.EnConstruccion);
             lista.Add(Vistas.EnConstruccion);
             lista.Add(Vistas.EnConstruccion);
@@ -52,6 +52,18 @@ namespace ConsolaApp
             lista.Add(Vistas.EnConstruccion);
             lista.Add(Vistas.MenuAdministracion);
             lista[opcion]();
+        }
+        private static void VerVentas()
+        {
+            Console.Clear();
+            Console.WriteLine("VENTAS");
+            List <string> ventas = Program._sistema.ListaPublicaciones("todos","todos");
+            for (int i = 0; i < ventas.Count; i++)
+            {
+                Console.WriteLine(ventas[i]);
+            }
+            Console.ReadKey();
+            AdministrarPublicaciones();
         }
 
         private static void AdministrarClientes()

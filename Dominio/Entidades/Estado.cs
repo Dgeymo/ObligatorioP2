@@ -15,5 +15,9 @@
         {
             return $"Id: {Id}\nNombre: {Nombre}\n";
         }
+        public void Validar()
+        {
+            if (string.IsNullOrEmpty(Nombre)) throw new Exception("El ESTADO no puede ser vacio o nulo.");
+        }
     }
 }

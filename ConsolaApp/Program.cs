@@ -11,12 +11,12 @@ namespace ConsolaApp
             {
                 PreCarga.PreCargas();
                 //_sistema.MostrarPrecargas(); //NO SE DEBE INCLUIR EN PROYECTO FINAL
+                Vistas.MenuInicio(); //MENU DEL PROGRAMA
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
-            Vistas.MenuInicio(); //MENU DEL PROGRAMA
         }
 
     }

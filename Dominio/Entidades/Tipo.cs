@@ -14,5 +14,10 @@
         {
             return $"Id: {Id}\nNombre: {Nombre}\n";
         }
+
+        public void Validar()
+        {
+            if (string.IsNullOrEmpty(Nombre)) throw new Exception("El TIPO no puede ser vacio o nulo.");
+        }
     }
 }
