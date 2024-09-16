@@ -1,4 +1,5 @@
 ﻿using Dominio.Entidades;
+using System.Reflection;
 namespace Dominio
 {
     public class Sistema
@@ -100,9 +101,9 @@ namespace Dominio
             if (string.IsNullOrEmpty(tipo)) throw new Exception("No se ha cargado el tipo en el parametro");
             if (string.IsNullOrEmpty(estado)) throw new Exception("No se ha cargado el estado en el parametro");
             List<string> publicaciones = new List<string>();
-            foreach (Publicacion unaPublicacion in _publicaciones)
+            foreach (Publicacion unaPublicacion in _publicaciones) //.Nombre == tipo.ToUpper())
             {
-                if ((tipo.ToUpper() == "TODOS" || unaPublicacion.Tipo.Nombre == tipo.ToUpper()) && (estado.ToUpper() == "TODOS" || unaPublicacion.Estado.Nombre == estado.ToUpper()))
+                if ((tipo.ToUpper() == "TODOS" || unaPublicacion.GetType().IsInstanceOfType(tipo)) && (estado.ToUpper() == "TODOS" || unaPublicacion.Estado.Nombre == estado.ToUpper()))
                 {
                     publicaciones.Add(unaPublicacion.ToString());
                 }

@@ -98,14 +98,12 @@ namespace ConsolaApp
         private static void PrecargaPublicaciones()
         {
             //VENTAS
-            _sistema.CargarPublicacion(new Publicacion("Verano en la Playa", _sistema.BuscarEstado("ABIERTA"),
-               DateTime.Now, _sistema.BuscarUsuario("dgeymonat84@gmail.com"),
-               _sistema.BuscarTipo("VENTA"), false, new List<Articulo> {_sistema.BuscarArticulo(4), _sistema.BuscarArticulo(6),
+            _sistema.CargarPublicacion(new Venta("Verano en la Playa", _sistema.BuscarEstado("ABIERTA"),
+               DateTime.Now, _sistema.BuscarUsuario("dgeymonat84@gmail.com"), false, new List<Articulo> {_sistema.BuscarArticulo(4), _sistema.BuscarArticulo(6),
                _sistema.BuscarArticulo(9), _sistema.BuscarArticulo(45)}));
             //SUBASTAS
-            _sistema.CargarPublicacion(new Publicacion("Atardecer en familia", _sistema.BuscarEstado("ABIERTA"),
-               DateTime.Now, _sistema.BuscarUsuario("ernaldo.rodriguez.dev1@gmail.com"),
-               _sistema.BuscarTipo("SUBASTA"), false, new List<Articulo> {_sistema.BuscarArticulo(8),
+            _sistema.CargarPublicacion(new Subasta("Atardecer en familia", _sistema.BuscarEstado("ABIERTA"),
+               DateTime.Now, _sistema.BuscarUsuario("ernaldo.rodriguez.dev1@gmail.com"), false, new List<Articulo> {_sistema.BuscarArticulo(8),
                _sistema.BuscarArticulo(15), _sistema.BuscarArticulo(9),_sistema.BuscarArticulo(36)}));
 
         }

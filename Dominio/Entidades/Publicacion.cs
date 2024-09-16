@@ -12,14 +12,12 @@
         public DateTime FechaFinalizado { get; set; }
         public Estado Estado { get; set; }
         public Usuario Usuario { get; set; }
-        public Tipo Tipo { get; set; }
 
-        public bool Oferta = false;     
+        public bool Oferta = false;
         public Publicacion(string nombre,
                         Estado estado,
                         DateTime fechaPublicacion,
                         Usuario usuario,
-                        Tipo tipo,
                         bool oferta,
                         List<Articulo> articulos)
         {
@@ -28,7 +26,6 @@
             Estado = estado;
             FechaPublicacion = fechaPublicacion;
             Usuario = usuario;
-            Tipo = tipo;
             Oferta = oferta;
             _articulos = articulos;
 
@@ -38,14 +35,7 @@
         public override string ToString()
         {
             string respuesta = string.Empty;
-            respuesta = $"Id: {Id}\n" +
-                $"Tipo: {Tipo.Nombre}\n" +
-                $"Nombre: {Nombre}\n" +
-                $"Usuario: {Usuario.Nombre} {Usuario.Apellido}\n" +
-                $"Estado: {Estado.Nombre}\n" +
-                $"Fecha Publicación: {FechaPublicacion}\n";
-            if (Estado.Nombre == "Finalizado") respuesta += $"Fecha Finalizado: {FechaFinalizado}\n";
-            respuesta += $"ARTICULOS\n";
+            respuesta = $"ARTICULOS\n";
             for (int i = 0; i < _articulos.Count; i++)
             {
                 respuesta += $"Id: {_articulos[i].Id} " +
@@ -56,11 +46,13 @@
 
         public void AgregarArticuloProducto(Articulo articulo)
         {
-            if (articulo != null) _articulos.Add(articulo);
+            if (articulo == null) throw new Exception("Datos incorrectos al intentar agregar Articulos.");
+            _articulos.Add(articulo);
         }
 
         public void QuitarArticuloProducto(Articulo articulo)
         {
+            if (articulo == null) throw new Exception("Datos incorrectos al intentar quitar Articulos.");
             _articulos.Remove(articulo);
         }
         public void Validar()
@@ -68,7 +60,6 @@
             if (string.IsNullOrEmpty(Nombre) ||
                  Estado == null ||
                  Usuario == null ||
-                 Tipo == null ||
                  string.IsNullOrEmpty(FechaPublicacion.ToString()) ||
                  string.IsNullOrEmpty(Oferta.ToString()))
             {
