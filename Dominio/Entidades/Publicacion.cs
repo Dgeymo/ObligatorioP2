@@ -14,15 +14,14 @@
         public Usuario Usuario { get; set; }
         public Tipo Tipo { get; set; }
 
-        public bool Oferta = false;
-        public List<int> IdArticulos { get; set; }
+        public bool Oferta = false;     
         public Publicacion(string nombre,
                         Estado estado,
                         DateTime fechaPublicacion,
                         Usuario usuario,
                         Tipo tipo,
                         bool oferta,
-                        List<int> idArticulos)
+                        List<Articulo> articulos)
         {
             Id = _ultimoId++;
             Nombre = nombre;
@@ -31,7 +30,7 @@
             Usuario = usuario;
             Tipo = tipo;
             Oferta = oferta;
-            IdArticulos = idArticulos;
+            _articulos = articulos;
 
 
         }
@@ -55,12 +54,16 @@
             return respuesta;
         }
 
-        public void AgregarArticulo(Articulo articulo)
+        public void AgregarArticuloProducto(Articulo articulo)
         {
             if (articulo != null) _articulos.Add(articulo);
         }
 
-        internal void Validar()
+        public void QuitarArticuloProducto(Articulo articulo)
+        {
+            _articulos.Remove(articulo);
+        }
+        public void Validar()
         {
             if (string.IsNullOrEmpty(Nombre) ||
                  Estado == null ||
