@@ -1,5 +1,4 @@
-﻿using Dominio;
-using Dominio.Entidades;
+﻿using Dominio.Entidades;
 namespace ConsolaApp
 {
     public class Vistas
@@ -140,11 +139,11 @@ namespace ConsolaApp
                 {
                     Console.Clear();
                     Console.WriteLine("Ingrese un título para la categoria.  (0) Cancelar");
-                    string titulo = Console.ReadLine();
+                    string titulo = Console.ReadLine()!;
                     if (titulo != "0")
                     {
                         Console.WriteLine("Ingrese una breve descripción de la categoria.  (0) Cancelar");
-                        string descripcion = Console.ReadLine();
+                        string descripcion = Console.ReadLine()!;
                         if (descripcion != "0")
                         {
                             Categoria nuevaCategoria = new Categoria(titulo, descripcion);
@@ -211,7 +210,7 @@ namespace ConsolaApp
                 {
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine($"Seleccione una opcion del menú");
-                    opcion = int.Parse(Console.ReadLine());
+                    opcion = int.Parse(Console.ReadLine()!);
                     flag = true;
                     if (opcion > opciones - 1) flag = false;
                 }

@@ -2,7 +2,7 @@
 {
     public class Cliente : Usuario
     {
-        public decimal saldoBilletera { get; set; }
+        public decimal SaldoBilletera { get; set; }
 
         public Cliente(
            string nombre,
@@ -11,17 +11,18 @@
            string password,
            decimal Billetera) : base(nombre, apellido, email, password)
         {          
-            saldoBilletera = Billetera;
+            SaldoBilletera = Billetera;
         }
         public override string ToString()
         {
             string mensaje = string.Empty;
-            mensaje += $"Id: {Id}\nNombre: {Nombre}\nApellido: {Apellido}\nEmail: {Email}\nCuentaSaldo: {saldoBilletera}\nTipo: Cliente";
+            mensaje += $"Id: {Id}\nNombre: {Nombre}\nApellido: {Apellido}\nEmail: {Email}\nCuentaSaldo: {SaldoBilletera}\nTipo: Cliente";
             return mensaje;
         }
         public override void Validar()
         {
-           //
+            base.Validar();
+            if (SaldoBilletera < 0) throw new Exception("El saldo no puede ser negativo");
         }
     }
 }

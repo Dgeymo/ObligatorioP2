@@ -8,7 +8,7 @@ namespace Dominio
         private List<Articulo> _articulos = new List<Articulo>();
         private List<Categoria> _categorias = new List<Categoria>();
         private List<Estado> _estados = new List<Estado>();
-      //  private List<Tipo> _tipos = new List<Tipo>();
+        //  private List<Tipo> _tipos = new List<Tipo>();
 
         //Bloque de busquedas por parametro
         public Estado BuscarEstado(string estado)
@@ -20,15 +20,6 @@ namespace Dominio
             }
             return null!;
         }
-        //public Tipo BuscarTipo(string tipo)
-        //{
-        //    if (String.IsNullOrEmpty(tipo)) throw new Exception("No se ha cargado el tipo en el parametro");           
-        //    foreach (Tipo untipo in _tipos)
-        //    {
-        //        if (untipo.Nombre.ToUpper() == tipo.ToUpper()) return untipo;
-        //    }
-        //    return null!;
-        //}
         public Usuario BuscarUsuario(string email)
         {
             if (String.IsNullOrEmpty(email)) throw new Exception("No se ha cargado el email en el parametro");
@@ -50,13 +41,25 @@ namespace Dominio
             }
             return null!;
         }
-
         public Articulo BuscarArticulo(int idArticulo)
         {
             if (!int.TryParse(idArticulo.ToString(), out _)) throw new Exception("No se ha pasado un número");
             foreach (Articulo unArticulo in _articulos)
             {
                 if (unArticulo.Id == idArticulo) return unArticulo;
+            }
+            return null!;
+        }
+        public Subasta BuscarPublicacionSubasta(int idPublicacion)
+        {
+            if (!int.TryParse(idPublicacion.ToString(), out _)) throw new Exception("ingrese un id valido de publicacion");
+            foreach (Publicacion unaPublicacion in _publicaciones)
+            {
+                if (unaPublicacion.Id == idPublicacion)
+                {
+                    if (unaPublicacion is not Subasta) throw new Exception("El id ingresado no es una subasta");
+                    return (Subasta)unaPublicacion;
+                }
             }
             return null!;
         }
@@ -74,28 +77,58 @@ namespace Dominio
         }
         public List<string> ListaPublicaciones(string tipo, string estado)
         {
-            if (string.IsNullOrEmpty(tipo)) throw new Exception("No se ha cargado el tipo en el parametro");
             if (string.IsNullOrEmpty(estado)) throw new Exception("No se ha cargado el estado en el parametro");
+            if (string.IsNullOrEmpty(tipo)) throw new Exception("No se ha cargado el tipo en el parametro");
             List<string> publicaciones = new List<string>();
-            foreach (Publicacion unaPublicacion in _publicaciones) //.Nombre == tipo.ToUpper())
+
+            foreach (Publicacion unaPublicacion in _publicaciones) //.nombre == tipo.ToUpper())
             {
-                if ((tipo.ToUpper() == "TODOS" || unaPublicacion.GetType().IsInstanceOfType(tipo)) && (estado.ToUpper() == "TODOS" || unaPublicacion.Estado.Nombre == estado.ToUpper()))
+                if (tipo.ToUpper() == "TODOS")
                 {
-                    publicaciones.Add(unaPublicacion.ToString());
+                    if (estado.ToUpper() == unaPublicacion.Estado.Nombre.ToUpper())
+                    {
+                        publicaciones.Add(unaPublicacion.ToString());
+                    }
+                    else if (estado.ToUpper() == "TODOS")
+                    {
+                        publicaciones.Add(unaPublicacion.ToString());
+                    }
+                }
+                else if (tipo.ToUpper() == "VENTA" && unaPublicacion is Venta)
+                {
+                    if (estado.ToUpper() == unaPublicacion.Estado.Nombre.ToUpper())
+                    {
+                        publicaciones.Add(unaPublicacion.ToString());
+                    }
+                    else if (estado.ToUpper() == "TODOS")
+                    {
+                        publicaciones.Add(unaPublicacion.ToString());
+                    }
+                }
+                else if (tipo.ToUpper() == "SUBASTA" && unaPublicacion is Subasta)
+                {
+                    if (estado.ToUpper() == unaPublicacion.Estado.Nombre.ToUpper())
+                    {
+                        publicaciones.Add(unaPublicacion.ToString());
+                    }
+                    else if (estado.ToUpper() == "TODOS")
+                    {
+                        publicaciones.Add(unaPublicacion.ToString());
+                    }
                 }
             }
             return publicaciones;
         }
         //bloque de muestra de objetos
-        public Usuario MostrarUsuario(string Nombre)
+        public Usuario MostrarUsuario(string nombre)
         {
             bool existe = false;
             int i = 0;
-            if (string.IsNullOrEmpty(Nombre)) throw new Exception("No se ha cargado el nombre en el parametro");
+            if (string.IsNullOrEmpty(nombre)) throw new Exception("No se ha cargado el nombre en el parametro");
             while (!existe && i < _usuarios.Count)
             {
                 if (string.IsNullOrEmpty(_usuarios[i].Nombre)) throw new Exception("No existe el nombre en el objeto");
-                if (_usuarios[i] != null && _usuarios[i].Nombre == Nombre)
+                if (_usuarios[i] != null && _usuarios[i].Nombre == nombre)
                 {
                     existe = true;
                     return (Cliente)_usuarios[i];
@@ -111,13 +144,12 @@ namespace Dominio
             nuevoArticulo.Validar();
             _articulos.Add(nuevoArticulo);
         }
-        public void CargarPublicacion(Publicacion nuevaPublicacion)
+        public void AgregarPublicacion(Publicacion nuevaPublicacion)
         {
-            if (nuevaPublicacion == null) throw new Exception("Valor nulo en el parametro publicacion"); 
-                      nuevaPublicacion.Validar();
+            if (nuevaPublicacion == null) throw new Exception("Valor nulo en el parametro publicacion");
+            nuevaPublicacion.Validar();
             _publicaciones.Add(nuevaPublicacion);
         }
-
         public void AgregarCategoria(Categoria nuevaCategoria)
         {
             if (nuevaCategoria == null) throw new Exception("Valor nulo en el parametro de agregar categoría");
@@ -138,25 +170,6 @@ namespace Dominio
             if (ExisteEstado(estado.Nombre)) throw new Exception("El estado ya existe");
             _estados.Add(estado);
         }
-        //public void AgregarTipo(Tipo tipo)
-        //{
-        //    if (tipo == null) throw new Exception("Valor nulo en el parametro de agregar tipo");
-        //    tipo.Validar();
-        //    if (ExisteTipo(tipo.Nombre)) throw new Exception("El tipo ya existe");
-        //    _tipos.Add(tipo);
-        //}
-        //Comparadores para repetidos
-        //private bool ExisteTipo(string tipo)
-        //{
-        //    if (tipo == null) throw new Exception("Valor nulo en el parametro de agregar tipo");
-        //    bool repetido = false;
-        //    for (int i = 0; i < _tipos.Count; i++)
-        //    {
-        //        Tipo unTipo = _tipos[i];
-        //        if (unTipo.Nombre.ToUpper() == tipo.ToUpper()) repetido = true;
-        //    }
-        //    return repetido;
-        //}
         private bool ExisteEstado(string estado)
         {
             if (estado == null) throw new Exception("Valor nulo en el parametro de agregar estado");
@@ -205,6 +218,8 @@ namespace Dominio
                 Console.WriteLine(_estados[i]);
             }
         }
+
+
 
         //public object Obtener(List<object> lista, Categoria parametro, Categoria valor)
         //{

@@ -1,4 +1,5 @@
-﻿using Dominio.Entidades;
+﻿using Dominio;
+using Dominio.Entidades;
 
 namespace ConsolaApp
 {
@@ -10,8 +11,8 @@ namespace ConsolaApp
             PrecargaCategoria();
             PrecargaArticulo();
             PrecargaEstado();
-           // PrecargaTipo();
             PrecargaPublicaciones();
+            PreCargaOfertas();
         }
         private static void PrecargaUsuarios()
         {
@@ -89,23 +90,23 @@ namespace ConsolaApp
             _sistema.AgregarEstado(new Estado("ABIERTA"));
             _sistema.AgregarEstado(new Estado("CERRADA"));
             _sistema.AgregarEstado(new Estado("CANCELADA"));
-        }
-        //private static void PrecargaTipo()
-        //{
-        //    _sistema.AgregarTipo(new Tipo("VENTA"));
-        //    _sistema.AgregarTipo(new Tipo("SUBASTA"));
-        //}
+        }      
         private static void PrecargaPublicaciones()
         {
             //VENTAS
-            _sistema.CargarPublicacion(new Venta("Verano en la Playa", _sistema.BuscarEstado("ABIERTA"),
-               DateTime.Now, _sistema.BuscarUsuario("dgeymonat84@gmail.com"), false, new List<Articulo> {_sistema.BuscarArticulo(4), _sistema.BuscarArticulo(6),
+            _sistema.AgregarPublicacion(new Venta("Verano en la Playa", _sistema.BuscarEstado("ABIERTA"),
+               _sistema.BuscarUsuario("dgeymonat84@gmail.com"), false, new List<Articulo> {_sistema.BuscarArticulo(4), _sistema.BuscarArticulo(6),
                _sistema.BuscarArticulo(9), _sistema.BuscarArticulo(45)}));
             //SUBASTAS
-            _sistema.CargarPublicacion(new Subasta("Atardecer en familia", _sistema.BuscarEstado("ABIERTA"),
-               DateTime.Now, _sistema.BuscarUsuario("ernaldo.rodriguez.dev1@gmail.com"), false, new List<Articulo> {_sistema.BuscarArticulo(8),
+            _sistema.AgregarPublicacion(new Subasta("Atardecer en familia", _sistema.BuscarEstado("ABIERTA"),
+               _sistema.BuscarUsuario("ernaldo.rodriguez.dev1@gmail.com"), false, new List<Articulo> {_sistema.BuscarArticulo(8),
                _sistema.BuscarArticulo(15), _sistema.BuscarArticulo(9),_sistema.BuscarArticulo(36)}));
-
+        }
+        private static void PreCargaOfertas()
+        {
+          Subasta unaPublicacion =  _sistema.BuscarPublicacionSubasta(1);
+            unaPublicacion.CargarOferta(new Oferta(_sistema.BuscarUsuario("ernaldo.rodriguez.dev1@gmail.com"), 1334));
+            unaPublicacion.CargarOferta(new Oferta(_sistema.BuscarUsuario("dgeymonat84@gmail.com"), 256));
         }
     }
 }

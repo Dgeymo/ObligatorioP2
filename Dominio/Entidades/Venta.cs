@@ -3,13 +3,11 @@
     public class Venta : Publicacion
     {
         public Venta(string nombre,
-                        Estado estado,
-                        DateTime fechaPublicacion,
+                        Estado estado,                       
                         Usuario usuario,
                         bool oferta,
                         List<Articulo> articulos) : base(nombre,
-                         estado,
-                         fechaPublicacion,
+                         estado,                         
                          usuario,
                          oferta,
                         articulos)
@@ -17,16 +15,8 @@
         }
         public override string ToString()
         {
-            string respuesta = string.Empty;
-            respuesta = $"Id: {Id}\n" +
-                $"Tipo: Venta\n" +
-                $"Nombre: {Nombre}\n" +
-                $"Usuario: {Usuario.Nombre} {Usuario.Apellido}\n" +
-                $"Estado: {Estado.Nombre}\n" +
-                $"Fecha Publicación: {FechaPublicacion}\n";
-            if (Estado.Nombre == "Finalizado") respuesta += $"Fecha Finalizado: {FechaFinalizado}\n";
-           
-            base.ToString();
+           string respuesta = base.ToString();
+            respuesta += $"Tipo: Venta\n";
             return respuesta;
         }
     }

@@ -7,8 +7,8 @@ namespace Dominio.Entidades
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public string Email { get; set; }
-        internal string _password;
-        internal static int _ultimoId;
+        private string _password;
+        private static int _ultimoId;
 
         public string Password
         {
@@ -27,5 +27,6 @@ namespace Dominio.Entidades
         {
            //todo:falta Validar
         }
-    }
+        public abstract override string ToString();     
+      }
 }
