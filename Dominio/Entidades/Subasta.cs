@@ -25,7 +25,7 @@
                 $"Estado: {Estado.Nombre}\n" +
                 $"Fecha Publicación: {FechaPublicacion}\n";
             if (Estado.Nombre == "Finalizado") respuesta += $"Fecha Finalizado: {FechaFinalizado}\n";
-            respuesta += $"ARTICULOS\n";
+          
             base.ToString();
             return respuesta;
         }

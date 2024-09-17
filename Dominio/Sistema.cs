@@ -1,5 +1,4 @@
 ﻿using Dominio.Entidades;
-using System.Reflection;
 namespace Dominio
 {
     public class Sistema
@@ -9,7 +8,7 @@ namespace Dominio
         private List<Articulo> _articulos = new List<Articulo>();
         private List<Categoria> _categorias = new List<Categoria>();
         private List<Estado> _estados = new List<Estado>();
-        private List<Tipo> _tipos = new List<Tipo>();
+      //  private List<Tipo> _tipos = new List<Tipo>();
 
         //Bloque de busquedas por parametro
         public Estado BuscarEstado(string estado)
@@ -18,32 +17,18 @@ namespace Dominio
             foreach (Estado unEstado in _estados)
             {
                 if (unEstado.Nombre.ToUpper() == estado.ToUpper()) return unEstado;
-
-                //for (int i = 0; i < _estados.Count; i++)
-                //{
-                //    Estado unEstado = _estados[i];
-                //    if (unEstado.Nombre.ToUpper() == estado.ToUpper())
-                //    {
-                //        return unEstado;
-                //    }
             }
             return null!;
         }
-        public Tipo BuscarTipo(string tipo)
-        {
-            if (String.IsNullOrEmpty(tipo)) throw new Exception("No se ha cargado el tipo en el parametro");           
-            foreach (Tipo untipo in _tipos)
-            {
-                if (untipo.Nombre.ToUpper() == tipo.ToUpper()) return untipo;
-            }
-            //if (tipo == null) throw new Exception("Debe elegir un TIPO de publicacion");
-            //for (int i = 0; i < _tipos.Count; i++)
-            //{
-            //    Tipo untipo = _tipos[i];
-            //    if (untipo.Nombre.ToUpper() == tipo.ToUpper()) return untipo;            
-            //}
-            return null!;
-        }
+        //public Tipo BuscarTipo(string tipo)
+        //{
+        //    if (String.IsNullOrEmpty(tipo)) throw new Exception("No se ha cargado el tipo en el parametro");           
+        //    foreach (Tipo untipo in _tipos)
+        //    {
+        //        if (untipo.Nombre.ToUpper() == tipo.ToUpper()) return untipo;
+        //    }
+        //    return null!;
+        //}
         public Usuario BuscarUsuario(string email)
         {
             if (String.IsNullOrEmpty(email)) throw new Exception("No se ha cargado el email en el parametro");
@@ -63,10 +48,6 @@ namespace Dominio
             {
                 if (unaCategoria.Nombre == categoria) return unaCategoria;
             }
-            //for (int i = 0; i < _categorias.Count; i++)
-            //{
-            //    if (_categorias[i].Nombre == categoria) return _categorias[i];
-            //}
             return null!;
         }
 
@@ -77,11 +58,6 @@ namespace Dominio
             {
                 if (unArticulo.Id == idArticulo) return unArticulo;
             }
-            //for (int i = 0; i < _articulos.Count; i++)
-            //{
-            //    Articulo unArticulo = _articulos[i];
-            //    if (unArticulo.Id == idArticulo) return unArticulo;
-            //}
             return null!;
         }
 
@@ -109,29 +85,6 @@ namespace Dominio
                 }
             }
             return publicaciones;
-
-            //if (tipo.ToUpper() != "TODOS")
-            //{
-            //    Tipo untipo = BuscarTipo(tipo);
-            //}
-            //if (estado.ToUpper() != "TODOS")
-            //{
-            //    Estado unEstado = BuscarEstado(estado);
-            //}
-
-
-            //for (int i = 0; i < _publicaciones.Count; i++)
-            //{
-            //    Publicacion unaPublicacion = _publicaciones[i];
-            //    if (tipo.ToUpper() == "TODOS" || unaPublicacion.Tipo.Nombre == tipo.ToUpper())
-            //    {
-            //        if (estado.ToUpper() == "TODOS" || unaPublicacion.Estado.Nombre == estado.ToUpper())
-            //        {
-            //            publicaciones.Add(unaPublicacion.ToString());
-            //        }
-            //    }
-            //}
-            //return publicaciones;
         }
         //bloque de muestra de objetos
         public Usuario MostrarUsuario(string Nombre)
@@ -161,19 +114,7 @@ namespace Dominio
         public void CargarPublicacion(Publicacion nuevaPublicacion)
         {
             if (nuevaPublicacion == null) throw new Exception("Valor nulo en el parametro publicacion"); 
-            //for (int i = 0; i < publicacion.IdArticulos.Count; i++)
-            //{
-            //    Articulo unArticulo = BuscarArticulo(publicacion.IdArticulos[i]);
-            //    for (int j = 0; j < _articulos.Count; j++)
-            //    {
-            //        Articulo elArticulo = BuscarArticulo(j);
-            //        if (unArticulo != null && unArticulo.Id == elArticulo.Id)
-            //        {
-            //            publicacion.AgregarArticulo(elArticulo);
-            //        }
-            //    }
-            //}
-            nuevaPublicacion.Validar();
+                      nuevaPublicacion.Validar();
             _publicaciones.Add(nuevaPublicacion);
         }
 
@@ -197,25 +138,25 @@ namespace Dominio
             if (ExisteEstado(estado.Nombre)) throw new Exception("El estado ya existe");
             _estados.Add(estado);
         }
-        public void AgregarTipo(Tipo tipo)
-        {
-            if (tipo == null) throw new Exception("Valor nulo en el parametro de agregar tipo");
-            tipo.Validar();
-            if (ExisteTipo(tipo.Nombre)) throw new Exception("El tipo ya existe");
-            _tipos.Add(tipo);
-        }
+        //public void AgregarTipo(Tipo tipo)
+        //{
+        //    if (tipo == null) throw new Exception("Valor nulo en el parametro de agregar tipo");
+        //    tipo.Validar();
+        //    if (ExisteTipo(tipo.Nombre)) throw new Exception("El tipo ya existe");
+        //    _tipos.Add(tipo);
+        //}
         //Comparadores para repetidos
-        private bool ExisteTipo(string tipo)
-        {
-            if (tipo == null) throw new Exception("Valor nulo en el parametro de agregar tipo");
-            bool repetido = false;
-            for (int i = 0; i < _tipos.Count; i++)
-            {
-                Tipo unTipo = _tipos[i];
-                if (unTipo.Nombre.ToUpper() == tipo.ToUpper()) repetido = true;
-            }
-            return repetido;
-        }
+        //private bool ExisteTipo(string tipo)
+        //{
+        //    if (tipo == null) throw new Exception("Valor nulo en el parametro de agregar tipo");
+        //    bool repetido = false;
+        //    for (int i = 0; i < _tipos.Count; i++)
+        //    {
+        //        Tipo unTipo = _tipos[i];
+        //        if (unTipo.Nombre.ToUpper() == tipo.ToUpper()) repetido = true;
+        //    }
+        //    return repetido;
+        //}
         private bool ExisteEstado(string estado)
         {
             if (estado == null) throw new Exception("Valor nulo en el parametro de agregar estado");

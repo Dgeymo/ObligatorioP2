@@ -10,7 +10,7 @@ namespace ConsolaApp
             PrecargaCategoria();
             PrecargaArticulo();
             PrecargaEstado();
-            PrecargaTipo();
+           // PrecargaTipo();
             PrecargaPublicaciones();
         }
         private static void PrecargaUsuarios()
@@ -90,11 +90,11 @@ namespace ConsolaApp
             _sistema.AgregarEstado(new Estado("CERRADA"));
             _sistema.AgregarEstado(new Estado("CANCELADA"));
         }
-        private static void PrecargaTipo()
-        {
-            _sistema.AgregarTipo(new Tipo("VENTA"));
-            _sistema.AgregarTipo(new Tipo("SUBASTA"));
-        }
+        //private static void PrecargaTipo()
+        //{
+        //    _sistema.AgregarTipo(new Tipo("VENTA"));
+        //    _sistema.AgregarTipo(new Tipo("SUBASTA"));
+        //}
         private static void PrecargaPublicaciones()
         {
             //VENTAS
