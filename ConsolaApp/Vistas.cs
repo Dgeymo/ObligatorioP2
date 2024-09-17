@@ -98,11 +98,38 @@ namespace ConsolaApp
         {
             Console.Clear();
             Console.WriteLine("ADMINISTRACION DE CLIENTES");
-            int opcion = ConstructorMenu(["Listar clientes", "Volver"]);
+            int opcion = ConstructorMenu(["Listar clientes", "Listar administradores", "Volver"]);
             lista.Clear();
-            lista.Add(Vistas.EnConstruccion);
-            lista.Add(Vistas.MenuAdministracion);
+            lista.Add(ListarClientes);
+            lista.Add(ListarAdministradores);
+            lista.Add(MenuAdministracion);
             lista[opcion]();
+        }
+        private static void ListarClientes()
+        {
+            Console.Clear();
+            Console.WriteLine("CLIENTES\n");
+            List<string> listaUsuarios = new (Program._sistema.MostrarUsuarios(false));
+            foreach (string usuario in listaUsuarios)
+            {
+                Console.WriteLine(usuario.ToString() + "\n");
+            }
+            Console.WriteLine("Presione cualquier tecla para continuar...");
+            Console.ReadKey();
+            AdministrarClientes();
+        }
+        private static void ListarAdministradores()
+        {
+            Console.Clear();
+            Console.WriteLine("ADMINISTRADORES\n");
+            List<string> listaUsuarios = new(Program._sistema.MostrarUsuarios(true));
+            foreach (string usuario in listaUsuarios)
+            {
+                Console.WriteLine(usuario.ToString() + "\n");
+            }
+            Console.WriteLine("Presione cualquier tecla para continuar...");
+            Console.ReadKey();
+            AdministrarClientes();
         }
 
         private static void AdministrarProductos()

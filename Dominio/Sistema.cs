@@ -65,6 +65,24 @@ namespace Dominio
         }
 
         //Bloque de muestra de listas como strings
+
+        public List<string> MostrarUsuarios(bool admin)
+        {
+            List<string> unaLista = new List<string>();
+            
+            foreach(Usuario usuario in _usuarios)
+            {
+                if (usuario is Cliente && !admin)
+                {
+                    unaLista.Add(usuario.ToString());
+                }
+                else if(usuario is Administrador && admin)
+                {
+                    unaLista.Add(usuario.ToString());
+                }
+            }
+            return unaLista;
+        }
         public List<string> MostrarCategorias()
         {
             List<string> listaCategorias = new List<string>();

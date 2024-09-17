@@ -30,6 +30,7 @@
         }
         public override string ToString()
         {
+            decimal precioPublicacion = 0;
             string respuesta = string.Empty;
             respuesta = $"Id: {Id}\n" +
                 $"Nombre: {Nombre}\n" +
@@ -41,8 +42,11 @@
             for (int i = 0; i < _articulos.Count; i++)
             {
                 respuesta += $"Id: {_articulos[i].Id} " +
-                    $"{_articulos[i].Nombre}\n";
+                    $"{_articulos[i].Nombre} " +
+                    $"${_articulos[i].Precio}\n";
+                precioPublicacion += _articulos[i].Precio;
             }
+            respuesta += $"Total de la publicación: ${precioPublicacion}\n";
             return respuesta;
         }
         public void AgregarArticuloProducto(Articulo articulo)
