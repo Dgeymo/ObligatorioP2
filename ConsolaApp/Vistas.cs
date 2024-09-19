@@ -1,7 +1,8 @@
-﻿using Dominio.Entidades;
+﻿using Dominio;
+using Dominio.Entidades;
 namespace ConsolaApp
 {
-    public class Vistas
+    public class Vistas:Program
     {
         private delegate void Parametro1();
         private static List<Parametro1> lista = new List<Parametro1>();
@@ -59,19 +60,19 @@ namespace ConsolaApp
             switch (opcion)
             {
                 case 0:
-                    VerPublicaciones("Todas las publicaciones", "todos", "todos");
+                    VerPublicaciones("Todas las publicaciones", "todos", Estado.TODOS);
                     Console.WriteLine("Presione cualquier tecla para continuar...");
                     Console.ReadKey();
                     ListarPublicaciones();
                     break;
                 case 1:
-                    VerPublicaciones("VENTAS", "venta", "todos");
+                    VerPublicaciones("VENTAS", "venta", Estado.TODOS);
                     Console.WriteLine("Presione cualquier tecla para continuar...");
                     Console.ReadKey();
                     ListarPublicaciones();
                     break;
                 case 2:
-                    VerPublicaciones("SUBASTAS", "subasta", "todos");
+                    VerPublicaciones("SUBASTAS", "subasta", Estado.TODOS);
                     Console.WriteLine("Presione cualquier tecla para continuar...");
                     Console.ReadKey();
                     ListarPublicaciones();
@@ -83,11 +84,11 @@ namespace ConsolaApp
                     break;
             }
         }
-        private static void VerPublicaciones(string titulo, string tipo, string estado)
+        private static void VerPublicaciones(string titulo, string tipo, Estado estado)
         {
             Console.Clear();
             Console.WriteLine(titulo);
-            List<string> ventas = Program._sistema.ListaPublicaciones(tipo, estado);
+            List<string> ventas = _sistema.ListaPublicaciones(tipo, estado);
             for (int i = 0; i < ventas.Count; i++)
             {
                 Console.WriteLine(ventas[i]);

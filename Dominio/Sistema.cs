@@ -11,15 +11,15 @@ namespace Dominio
         //  private List<Tipo> _tipos = new List<Tipo>();
 
         //Bloque de busquedas por parametro
-        public Estado BuscarEstado(string estado)
-        {
-            if (String.IsNullOrEmpty(estado)) throw new Exception("Debe elegir un ESTADO de publicacion");
-            foreach (Estado unEstado in _estados)
-            {
-                if (unEstado.Nombre.ToUpper() == estado.ToUpper()) return unEstado;
-            }
-            return null!;
-        }
+        //public Estado BuscarEstado(string estado)
+        //{
+        //    if (String.IsNullOrEmpty(estado)) throw new Exception("Debe elegir un ESTADO de publicacion");
+        //    foreach (Estado unEstado in _estados)
+        //    {
+        //        if (unEstado.Nombre.ToUpper() == estado.ToUpper()) return unEstado;
+        //    }
+        //    return null!;
+        //}
         public Usuario BuscarUsuario(string email)
         {
             if (String.IsNullOrEmpty(email)) throw new Exception("No se ha cargado el email en el parametro");
@@ -93,9 +93,9 @@ namespace Dominio
 
             return listaCategorias;
         }
-        public List<string> ListaPublicaciones(string tipo, string estado)
+        public List<string> ListaPublicaciones(string tipo, Estado estado)
         {
-            if (string.IsNullOrEmpty(estado)) throw new Exception("No se ha cargado el estado en el parametro");
+            //if (estado.Equals(Estado.)) throw new Exception("No se ha cargado el estado en el parametro");
             if (string.IsNullOrEmpty(tipo)) throw new Exception("No se ha cargado el tipo en el parametro");
             List<string> publicaciones = new List<string>();
 
@@ -103,33 +103,33 @@ namespace Dominio
             {
                 if (tipo.ToUpper() == "TODOS")
                 {
-                    if (estado.ToUpper() == unaPublicacion.Estado.Nombre.ToUpper())
+                    if (estado == unaPublicacion.EstadoPublicacion)
                     {
                         publicaciones.Add(unaPublicacion.ToString());
                     }
-                    else if (estado.ToUpper() == "TODOS")
+                    else if (estado.ToString() == "TODOS")
                     {
                         publicaciones.Add(unaPublicacion.ToString());
                     }
                 }
                 else if (tipo.ToUpper() == "VENTA" && unaPublicacion is Venta)
                 {
-                    if (estado.ToUpper() == unaPublicacion.Estado.Nombre.ToUpper())
+                    if (estado == unaPublicacion.EstadoPublicacion)
                     {
                         publicaciones.Add(unaPublicacion.ToString());
                     }
-                    else if (estado.ToUpper() == "TODOS")
+                    else if (estado.ToString() == "TODOS")
                     {
                         publicaciones.Add(unaPublicacion.ToString());
                     }
                 }
                 else if (tipo.ToUpper() == "SUBASTA" && unaPublicacion is Subasta)
                 {
-                    if (estado.ToUpper() == unaPublicacion.Estado.Nombre.ToUpper())
+                    if (estado == unaPublicacion.EstadoPublicacion)
                     {
                         publicaciones.Add(unaPublicacion.ToString());
                     }
-                    else if (estado.ToUpper() == "TODOS")
+                    else if (estado.ToString() == "TODOS")
                     {
                         publicaciones.Add(unaPublicacion.ToString());
                     }
@@ -181,24 +181,24 @@ namespace Dominio
             if (ExisteUsuario(nuevoUsuario.Email)) throw new Exception("El usuario ya existe");
             _usuarios.Add(nuevoUsuario);
         }
-        public void AgregarEstado(Estado estado)
-        {
-            if (estado == null) throw new Exception("Valor nulo en el parametro de agregar estado");
-            estado.Validar();
-            if (ExisteEstado(estado.Nombre)) throw new Exception("El estado ya existe");
-            _estados.Add(estado);
-        }
-        private bool ExisteEstado(string estado)
-        {
-            if (estado == null) throw new Exception("Valor nulo en el parametro de agregar estado");
-            bool repetido = false;
-            for (int i = 0; i < _estados.Count; i++)
-            {
-                Estado unEstado = _estados[i];
-                if (unEstado.Nombre.ToUpper() == estado.ToUpper()) repetido = true;
-            }
-            return repetido;
-        }
+        //public void AgregarEstado(Estado estado)
+        //{
+        //    if (estado == null) throw new Exception("Valor nulo en el parametro de agregar estado");
+        //    estado.Validar();
+        //    if (ExisteEstado(estado.Nombre)) throw new Exception("El estado ya existe");
+        //    _estados.Add(estado);
+        //}
+        //private bool ExisteEstado(string estado)
+        //{
+        //    if (estado == null) throw new Exception("Valor nulo en el parametro de agregar estado");
+        //    bool repetido = false;
+        //    for (int i = 0; i < _estados.Count; i++)
+        //    {
+        //        Estado unEstado = _estados[i];
+        //        if (unEstado.Nombre.ToUpper() == estado.ToUpper()) repetido = true;
+        //    }
+        //    return repetido;
+        //}
         private bool ExisteUsuario(string email)
         {
             if (String.IsNullOrEmpty(email)) throw new Exception("Valor nulo en el parametro email");

@@ -10,7 +10,6 @@ namespace ConsolaApp
             PrecargaUsuarios();
             PrecargaCategoria();
             PrecargaArticulo();
-            PrecargaEstado();
             PrecargaPublicaciones();
             PreCargaOfertas();
         }
@@ -84,21 +83,15 @@ namespace ConsolaApp
             _sistema.AgregarArticulo(new Articulo("Consola virtual", new List<Categoria> { _sistema.BuscarCategoria("Entretenimiento"), _sistema.BuscarCategoria("Tecnología") }, 100));
             _sistema.AgregarArticulo(new Articulo("Tenis", new List<Categoria> { _sistema.BuscarCategoria("Deportes"), _sistema.BuscarCategoria("Indumentaria") }, 70));
             _sistema.AgregarArticulo(new Articulo("Kit de programación", new List<Categoria> { _sistema.BuscarCategoria("Tecnología"), _sistema.BuscarCategoria("Entretenimiento") }, 120));
-        }
-        private static void PrecargaEstado()
-        {
-            _sistema.AgregarEstado(new Estado("ABIERTA"));
-            _sistema.AgregarEstado(new Estado("CERRADA"));
-            _sistema.AgregarEstado(new Estado("CANCELADA"));
-        }      
+        }        
         private static void PrecargaPublicaciones()
         {
             //VENTAS
-            _sistema.AgregarPublicacion(new Venta("Verano en la Playa", _sistema.BuscarEstado("ABIERTA"),
+            _sistema.AgregarPublicacion(new Venta("Verano en la Playa", Estado.CERRADA,
                _sistema.BuscarUsuario("dgeymonat84@gmail.com"), false, new List<Articulo> {_sistema.BuscarArticulo(4), _sistema.BuscarArticulo(6),
                _sistema.BuscarArticulo(9), _sistema.BuscarArticulo(45)}));
             //SUBASTAS
-            _sistema.AgregarPublicacion(new Subasta("Atardecer en familia", _sistema.BuscarEstado("ABIERTA"),
+            _sistema.AgregarPublicacion(new Subasta("Atardecer en familia", Estado.ABIERTA,
                _sistema.BuscarUsuario("ernaldo.rodriguez.dev1@gmail.com"), false, new List<Articulo> {_sistema.BuscarArticulo(8),
                _sistema.BuscarArticulo(15), _sistema.BuscarArticulo(9),_sistema.BuscarArticulo(36)}));
         }

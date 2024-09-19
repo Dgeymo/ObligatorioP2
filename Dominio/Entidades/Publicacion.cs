@@ -10,7 +10,7 @@
         public string Nombre { get; set; }
         public DateTime FechaPublicacion { get; set; }
         public DateTime FechaFinalizado { get; set; }
-        public Estado Estado { get; set; }
+        public Estado EstadoPublicacion { get; set; }
         public Usuario Usuario { get; set; }
 
         public bool Oferta = false;
@@ -22,7 +22,7 @@
         {
             Id = _ultimoId++;
             Nombre = nombre;
-            Estado = estado;
+            EstadoPublicacion = estado;
             Usuario = usuario;
             Oferta = oferta;
             _articulos = articulos;
@@ -35,9 +35,9 @@
             respuesta = $"Id: {Id}\n" +
                 $"Nombre: {Nombre}\n" +
                 $"Usuario: {Usuario.Nombre} {Usuario.Apellido}\n" +
-                $"Estado: {Estado.Nombre}\n" +
+                $"Estado: {EstadoPublicacion}\n" +
                 $"Fecha Publicación: {FechaPublicacion}\n";
-            if (Estado.Nombre == "Finalizado") respuesta += $"Fecha Finalizado: {FechaFinalizado}\n";
+            if (EstadoPublicacion == Estado.CERRADA) respuesta += $"Fecha Finalizado: {FechaFinalizado}\n";
             respuesta += $"ARTICULOS:\n";
             for (int i = 0; i < _articulos.Count; i++)
             {
@@ -62,7 +62,6 @@
         public void Validar()
         {
             if (string.IsNullOrEmpty(Nombre) ||
-                 Estado == null ||
                  Usuario == null ||
                  string.IsNullOrEmpty(FechaPublicacion.ToString()) ||
                  string.IsNullOrEmpty(Oferta.ToString()))
