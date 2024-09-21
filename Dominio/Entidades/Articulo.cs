@@ -17,6 +17,11 @@ namespace Dominio.Entidades
             Precio = precio;
         }
 
+        public List<Categoria> ObtenerCategorias()
+        {
+            return _categorias;
+        }
+
         public override string ToString()
         {
             string mensaje = string.Empty;

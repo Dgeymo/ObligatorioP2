@@ -90,7 +90,15 @@ namespace Dominio
             {
                 listaCategorias.Add($"({i + 1}) " + _categorias[i].ToString());
             }
-
+            return listaCategorias;
+        }
+        public List<string> MostrarCategoriasNombre()
+        {
+            List<string> listaCategorias = new List<string>();
+            for (int i = 0; i < _categorias.Count; i++)
+            {
+                listaCategorias.Add(_categorias[i].Nombre.ToString());
+            }
             return listaCategorias;
         }
         public List<string> ListaPublicaciones(string tipo, Estado estado)
@@ -136,6 +144,31 @@ namespace Dominio
                 }
             }
             return publicaciones;
+        }
+
+        
+
+        public List<string> MostrarArticulos(string categoria)
+        {
+            List <string> resultado = new List<string>();
+            if (categoria.ToUpper() == "TODOS")
+            {
+                foreach (Articulo unArticulo in _articulos) resultado.Add(unArticulo.ToString());
+            }
+            else
+            {
+                foreach(Articulo unArticulo in _articulos)
+                {
+                    List<Categoria> categorias = new List<Categoria>();
+                    categorias = unArticulo.ObtenerCategorias();
+                    foreach(Categoria unaCategoria in categorias)
+                    {
+                        if (unaCategoria.Nombre == categoria)
+                            resultado.Add(unArticulo.ToString());
+                    }
+                }
+            }
+            return resultado;
         }
         //bloque de muestra de objetos
         public Usuario MostrarUsuario(string nombre)

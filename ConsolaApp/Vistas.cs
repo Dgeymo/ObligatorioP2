@@ -2,7 +2,7 @@
 using Dominio.Entidades;
 namespace ConsolaApp
 {
-    public class Vistas:Program
+    public class Vistas : Program
     {
         private delegate void Parametro1();
         private static List<Parametro1> lista = new List<Parametro1>();
@@ -40,7 +40,7 @@ namespace ConsolaApp
         {
             Console.Clear();
             Console.WriteLine("ADMINISTRACION DE PUBLICACIONES");
-            int opcion = ConstructorMenu(["Listar todas las publicaciones", "Crear nueva publicacion (VENTA)", "Crear nueva publicacion (SUBASTA)",
+            int opcion = ConstructorMenu(["Listar publicaciones", "Crear nueva publicacion (VENTA)", "Crear nueva publicacion (SUBASTA)",
                 "Administrar publicaciones ABIERTAS", "Volver"]);
             lista.Clear();
             lista.Add(Vistas.ListarPublicaciones);
@@ -50,7 +50,7 @@ namespace ConsolaApp
             lista.Add(Vistas.MenuAdministracion);
             lista[opcion]();
         }
-        
+
         private static void ListarPublicaciones()
         {
             Console.Clear();
@@ -110,7 +110,7 @@ namespace ConsolaApp
         {
             Console.Clear();
             Console.WriteLine("CLIENTES\n");
-            List<string> listaUsuarios = new (Program._sistema.MostrarUsuarios(false));
+            List<string> listaUsuarios = new(Program._sistema.MostrarUsuarios(false));
             foreach (string usuario in listaUsuarios)
             {
                 Console.WriteLine(usuario.ToString() + "\n");
@@ -140,11 +140,56 @@ namespace ConsolaApp
             int opcion = ConstructorMenu(["Listar productos", "Agregar producto", "Modificar producto",
                 "Volver"]);
             lista.Clear();
-            lista.Add(Vistas.EnConstruccion);
+            lista.Add(ListarProductos);
             lista.Add(Vistas.EnConstruccion);
             lista.Add(Vistas.EnConstruccion);
             lista.Add(Vistas.MenuAdministracion);
             lista[opcion]();
+        }
+
+        private static void ListarProductos()
+        {
+            Console.Clear();
+            Console.WriteLine("LISTAR PRODUCTOS");
+            int opcion = ConstructorMenu(["Todos los productos", "Por categoria", "Volver"]);
+            lista.Clear();
+            lista.Add(ListarProductosTodos);
+            lista.Add(ListarProductosFiltrado);
+            lista.Add(AdministrarProductos);
+            lista[opcion]();
+        }
+
+        private static void ListarProductosTodos()
+        {
+            Console.Clear();
+            List<string> lista = new(_sistema.MostrarArticulos("TODOS"));
+            foreach (string unArticulo in lista)
+            {
+                Console.WriteLine(unArticulo);
+            }
+            Console.WriteLine("Presione cualquier tecla para continuar...");
+            Console.ReadKey();
+            ListarProductos();
+        }
+        private static void ListarProductosFiltrado()
+        {
+            Console.Clear();
+            Console.WriteLine("LISTAR PRODUCTOS POR CATEGORIA");
+            Console.WriteLine("Seleccione una categoria");
+            List<string> categorias = new(_sistema.MostrarCategoriasNombre());
+            categorias.Add("Volver");
+            int opcion = ConstructorMenu(categorias.ToArray());
+            if (opcion == categorias.Count - 1) ListarProductos();
+            categorias = _sistema.MostrarCategoriasNombre();
+            List<string> articulos = new(_sistema.MostrarArticulos(categorias[opcion]));
+            Console.Clear();
+            foreach (string articulo in articulos)
+            {
+                Console.WriteLine(articulo);
+            }
+            Console.WriteLine("Presione cualquier tecla para continuar...");
+            Console.ReadKey();
+            ListarProductos();
         }
 
         private static void AdministrarCategorias()
@@ -192,7 +237,7 @@ namespace ConsolaApp
         {
             Console.Clear();
             Console.WriteLine("CATEGORÍAS\n");
-            List<string> lista = Program._sistema.MostrarCategorias();
+            List<string> lista = _sistema.MostrarCategorias();
             for (int i = 0; i < lista.Count; i++)
             {
                 Console.WriteLine(lista[i]);
