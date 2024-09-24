@@ -18,7 +18,8 @@
                         Estado estado,
                         Usuario usuario,
                         bool oferta,
-                        List<Articulo> articulos)
+                        List<Articulo> articulos,
+                        DateTime fechaPublicacion)
         {
             Id = _ultimoId++;
             Nombre = nombre;
@@ -26,7 +27,7 @@
             Usuario = usuario;
             Oferta = oferta;
             _articulos = articulos;
-            FechaPublicacion = DateTime.Now;
+            FechaPublicacion = fechaPublicacion;
         }
         public override string ToString()
         {
@@ -36,8 +37,8 @@
                 $"Nombre: {Nombre}\n" +
                 $"Usuario: {Usuario.Nombre} {Usuario.Apellido}\n" +
                 $"Estado: {EstadoPublicacion}\n" +
-                $"Fecha Publicación: {FechaPublicacion}\n";
-            if (EstadoPublicacion == Estado.CERRADA) respuesta += $"Fecha Finalizado: {FechaFinalizado}\n";
+                $"Fecha Publicación: {FechaPublicacion.ToShortDateString()}\n";
+            if (EstadoPublicacion == Estado.CERRADA) respuesta += $"Fecha Finalizado: {FechaFinalizado.ToShortDateString()}\n";
             respuesta += $"ARTICULOS:\n";
             for (int i = 0; i < _articulos.Count; i++)
             {

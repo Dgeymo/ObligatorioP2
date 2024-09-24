@@ -7,8 +7,9 @@
                        Estado estado,
                        Usuario usuario,
                        bool oferta,
-                       List<Articulo> articulos
-                     ) : base(nombre, estado, usuario, oferta, articulos)
+                       List<Articulo> articulos,
+                       DateTime fechaPublicacion
+                     ) : base(nombre, estado, usuario, oferta, articulos,fechaPublicacion)
         {
         }
         public override string ToString()

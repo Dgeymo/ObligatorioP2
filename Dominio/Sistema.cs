@@ -8,18 +8,7 @@ namespace Dominio
         private List<Articulo> _articulos = new List<Articulo>();
         private List<Categoria> _categorias = new List<Categoria>();
         private List<Estado> _estados = new List<Estado>();
-        //  private List<Tipo> _tipos = new List<Tipo>();
 
-        //Bloque de busquedas por parametro
-        //public Estado BuscarEstado(string estado)
-        //{
-        //    if (String.IsNullOrEmpty(estado)) throw new Exception("Debe elegir un ESTADO de publicacion");
-        //    foreach (Estado unEstado in _estados)
-        //    {
-        //        if (unEstado.Nombre.ToUpper() == estado.ToUpper()) return unEstado;
-        //    }
-        //    return null!;
-        //}
         public Usuario BuscarUsuario(string email)
         {
             if (String.IsNullOrEmpty(email)) throw new Exception("No se ha cargado el email en el parametro");
@@ -170,24 +159,7 @@ namespace Dominio
             }
             return resultado;
         }
-        //bloque de muestra de objetos
-        public Usuario MostrarUsuario(string nombre)
-        {
-            bool existe = false;
-            int i = 0;
-            if (string.IsNullOrEmpty(nombre)) throw new Exception("No se ha cargado el nombre en el parametro");
-            while (!existe && i < _usuarios.Count)
-            {
-                if (string.IsNullOrEmpty(_usuarios[i].Nombre)) throw new Exception("No existe el nombre en el objeto");
-                if (_usuarios[i] != null && _usuarios[i].Nombre == nombre)
-                {
-                    existe = true;
-                    return (Cliente)_usuarios[i];
-                }
-                i++;
-            }
-            return null!;
-        }
+        
         //Bloque de Add en las listas
         public void AgregarArticulo(Articulo nuevoArticulo)
         {
@@ -211,41 +183,8 @@ namespace Dominio
         {
             if (nuevoUsuario == null) throw new Exception("Valor nulo en el parametro de agregar usuario");
             nuevoUsuario.Validar();
-            if (ExisteUsuario(nuevoUsuario.Email)) throw new Exception("El usuario ya existe");
+            if (BuscarUsuario(nuevoUsuario.Email) != null) throw new Exception("El usuario ya existe");
             _usuarios.Add(nuevoUsuario);
-        }
-        //public void AgregarEstado(Estado estado)
-        //{
-        //    if (estado == null) throw new Exception("Valor nulo en el parametro de agregar estado");
-        //    estado.Validar();
-        //    if (ExisteEstado(estado.Nombre)) throw new Exception("El estado ya existe");
-        //    _estados.Add(estado);
-        //}
-        //private bool ExisteEstado(string estado)
-        //{
-        //    if (estado == null) throw new Exception("Valor nulo en el parametro de agregar estado");
-        //    bool repetido = false;
-        //    for (int i = 0; i < _estados.Count; i++)
-        //    {
-        //        Estado unEstado = _estados[i];
-        //        if (unEstado.Nombre.ToUpper() == estado.ToUpper()) repetido = true;
-        //    }
-        //    return repetido;
-        //}
-        private bool ExisteUsuario(string email)
-        {
-            if (String.IsNullOrEmpty(email)) throw new Exception("Valor nulo en el parametro email");
-            bool esRepetido = false;
-            int incremental = 0;
-            while (!esRepetido && incremental < _usuarios.Count)
-            {
-                if (_usuarios[incremental].Email.Equals(email))
-                {
-                    esRepetido = true;
-                }
-                incremental++;
-            }
-            return esRepetido;
         }
         /// <summary>
         /// ESTE METODO NO VA A INCLUIRSE EN EL PROYECTO FINAL. ES A MODO DE VER LOS REGISTROS DE CATEGORIA Y ARTICULOS INGRESADOS
