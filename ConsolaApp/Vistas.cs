@@ -108,7 +108,7 @@ namespace ConsolaApp
         {
             Console.Clear();
             Console.WriteLine("CLIENTES\n");
-            List<string> listaUsuarios = new(Program._sistema.MostrarUsuarios(false));
+            List<string> listaUsuarios = new(_sistema.MostrarUsuarios(false));
             foreach (string usuario in listaUsuarios)
             {
                 Console.WriteLine(usuario.ToString() + "\n");
@@ -120,7 +120,7 @@ namespace ConsolaApp
         {
             Console.Clear();
             Console.WriteLine("ADMINISTRADORES\n");
-            List<string> listaUsuarios = new(Program._sistema.MostrarUsuarios(true));
+            List<string> listaUsuarios = new(_sistema.MostrarUsuarios(true));
             foreach (string usuario in listaUsuarios)
             {
                 Console.WriteLine(usuario.ToString() + "\n");
@@ -295,9 +295,9 @@ namespace ConsolaApp
             Console.WriteLine("ADMINISTRACION DE CATEGORÍAS");
             int opcion = ConstructorMenu(["Listar categorías", "Agregar categoría", "Volver"]);
             lista.Clear();
-            lista.Add(Vistas.ListarCategoria);
-            lista.Add(Vistas.AgregarCategoria);
-            lista.Add(Vistas.MenuAdministracion);
+            lista.Add(ListarCategoria);
+            lista.Add(AgregarCategoria);
+            lista.Add(MenuAdministracion);
             lista[opcion]();
         }
         private static void AgregarCategoria()
@@ -356,7 +356,7 @@ namespace ConsolaApp
             Console.WriteLine(" EN CONSTRUCCION ");
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ReadKey();
-            Vistas.MenuInicio();
+            MenuInicio();
         }
         static int ConstructorMenu(string[] opciones)
         {
