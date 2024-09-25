@@ -39,7 +39,7 @@ namespace ConsolaApp
             _sistema.AgregarArticulo(new Articulo("Smartphone", new List<Categoria> {_sistema.BuscarCategoria("Tecnología") }, 600));
             _sistema.AgregarArticulo(new Articulo("Sofá", new List<Categoria> {_sistema.BuscarCategoria("Hogar") }, 300));
             _sistema.AgregarArticulo(new Articulo("Libro de programación", new List<Categoria> { _sistema.BuscarCategoria("Educación") }, 30));
-            _sistema.AgregarArticulo(new Articulo("Juguetes educativos", new List<Categoria> {_sistema.BuscarCategoria("Educación") }, 20));
+            _sistema.AgregarArticulo(new Articulo("Abaco infantil", new List<Categoria> {_sistema.BuscarCategoria("Educación") }, 20));
             _sistema.AgregarArticulo(new Articulo("Cera para duchas", new List<Categoria> { _sistema.BuscarCategoria("Salud")}, 15));
             _sistema.AgregarArticulo(new Articulo("Consola de videojuegos", new List<Categoria> { _sistema.BuscarCategoria("Entretenimiento") }, 400));
             _sistema.AgregarArticulo(new Articulo("Ropa interior", new List<Categoria> {_sistema.BuscarCategoria("Indumentaria") }, 18));
@@ -53,11 +53,11 @@ namespace ConsolaApp
             _sistema.AgregarArticulo(new Articulo("Pantalones de trabajo", new List<Categoria> {_sistema.BuscarCategoria("Indumentaria") }, 35));
             _sistema.AgregarArticulo(new Articulo("Smartwatch", new List<Categoria> {_sistema.BuscarCategoria("Tecnología") }, 200));
             _sistema.AgregarArticulo(new Articulo("Televisor", new List<Categoria> {_sistema.BuscarCategoria("Entretenimiento") }, 500));
-            _sistema.AgregarArticulo(new Articulo("Gorra de béisbol", new List<Categoria> {_sistema.BuscarCategoria("Deportes") }, 22));
+            _sistema.AgregarArticulo(new Articulo("Pelota de playa", new List<Categoria> {_sistema.BuscarCategoria("Deportes") }, 22));
             _sistema.AgregarArticulo(new Articulo("Acondicionador para cabello", new List<Categoria> { _sistema.BuscarCategoria("Salud") }, 12));
             _sistema.AgregarArticulo(new Articulo("Consola virtual", new List<Categoria> {_sistema.BuscarCategoria("Tecnología") }, 100));
             _sistema.AgregarArticulo(new Articulo("Tenis", new List<Categoria> {_sistema.BuscarCategoria("Indumentaria") }, 70));
-            _sistema.AgregarArticulo(new Articulo("Kit de programación", new List<Categoria> {_sistema.BuscarCategoria("Educación") }, 120));
+            _sistema.AgregarArticulo(new Articulo("Calculadora científica", new List<Categoria> {_sistema.BuscarCategoria("Educación") }, 120));
             _sistema.AgregarArticulo(new Articulo("Cama elástica", new List<Categoria> {_sistema.BuscarCategoria("Deportes") }, 180));
             _sistema.AgregarArticulo(new Articulo("Jugador de golf", new List<Categoria> { _sistema.BuscarCategoria("Indumentaria") }, 90));
             _sistema.AgregarArticulo(new Articulo("Cera para pestañas", new List<Categoria> {_sistema.BuscarCategoria("Salud") }, 10));
@@ -88,33 +88,33 @@ namespace ConsolaApp
         {
             //VENTAS
             _sistema.AgregarPublicacion(new Venta("Verano en la Playa", Estado.ABIERTA,
-               _sistema.BuscarUsuario("dgeymonat84@gmail.com"), false, new List<Articulo> {_sistema.BuscarArticulo(4), _sistema.BuscarArticulo(6),
-               _sistema.BuscarArticulo(9), _sistema.BuscarArticulo(45)}, FechaRandom()));
-            _sistema.AgregarPublicacion(new Venta("Verano en la Playa", Estado.ABIERTA,
+               _sistema.BuscarUsuario("dgeymonat84@gmail.com"), false, new List<Articulo> {_sistema.BuscarArticulo(20), _sistema.BuscarArticulo(25),
+               _sistema.BuscarArticulo(42), _sistema.BuscarArticulo(38)}, FechaRandom()));
+            _sistema.AgregarPublicacion(new Venta("Mantente en forma", Estado.ABIERTA,
                _sistema.BuscarUsuario("dgeymonat84@gmail.com"), false, new List<Articulo> {_sistema.BuscarArticulo(45), _sistema.BuscarArticulo(38),
                _sistema.BuscarArticulo(25)}, FechaRandom()));
-            _sistema.AgregarPublicacion(new Venta("Verano en la Playa", Estado.ABIERTA,
+            _sistema.AgregarPublicacion(new Venta("Sal de tu casa", Estado.ABIERTA,
                _sistema.BuscarUsuario("dgeymonat84@gmail.com"), false, new List<Articulo> {_sistema.BuscarArticulo(42), _sistema.BuscarArticulo(25),
                _sistema.BuscarArticulo(20), _sistema.BuscarArticulo(45)}, FechaRandom()));
-            _sistema.AgregarPublicacion(new Venta("Verano en la Playa", Estado.ABIERTA,
+            _sistema.AgregarPublicacion(new Venta("Luce el mejor look", Estado.ABIERTA,
                _sistema.BuscarUsuario("dgeymonat84@gmail.com"), false, new List<Articulo> {_sistema.BuscarArticulo(26), _sistema.BuscarArticulo(48),
                _sistema.BuscarArticulo(17), _sistema.BuscarArticulo(9)}, FechaRandom()));
-            _sistema.AgregarPublicacion(new Venta("Verano en la Playa", Estado.ABIERTA,
+            _sistema.AgregarPublicacion(new Venta("Mantente saludable", Estado.ABIERTA,
                _sistema.BuscarUsuario("dgeymonat84@gmail.com"), false, new List<Articulo> {_sistema.BuscarArticulo(46), _sistema.BuscarArticulo(13),
                _sistema.BuscarArticulo(7)}, FechaRandom()));
-            _sistema.AgregarPublicacion(new Venta("Verano en la Playa", Estado.ABIERTA,
+            _sistema.AgregarPublicacion(new Venta("Para cuidar tu cuerpo", Estado.ABIERTA,
                _sistema.BuscarUsuario("dgeymonat84@gmail.com"), false, new List<Articulo> {_sistema.BuscarArticulo(43), _sistema.BuscarArticulo(35),
                _sistema.BuscarArticulo(2), _sistema.BuscarArticulo(32)}, FechaRandom()));
-            _sistema.AgregarPublicacion(new Venta("Verano en la Playa", Estado.ABIERTA,
+            _sistema.AgregarPublicacion(new Venta("Para quedarte en casa", Estado.ABIERTA,
                _sistema.BuscarUsuario("dgeymonat84@gmail.com"), false, new List<Articulo> {_sistema.BuscarArticulo(41), _sistema.BuscarArticulo(8),
                _sistema.BuscarArticulo(10)}, FechaRandom()));
-            _sistema.AgregarPublicacion(new Venta("Verano en la Playa", Estado.ABIERTA,
+            _sistema.AgregarPublicacion(new Venta("Cultiva tu mente", Estado.ABIERTA,
                _sistema.BuscarUsuario("dgeymonat84@gmail.com"), false, new List<Articulo> {_sistema.BuscarArticulo(31), _sistema.BuscarArticulo(49),
                _sistema.BuscarArticulo(24), _sistema.BuscarArticulo(5)}, FechaRandom()));
-            _sistema.AgregarPublicacion(new Venta("Verano en la Playa", Estado.ABIERTA,
+            _sistema.AgregarPublicacion(new Venta("Mantente actualizado", Estado.ABIERTA,
                _sistema.BuscarUsuario("dgeymonat84@gmail.com"), false, new List<Articulo> {_sistema.BuscarArticulo(28), _sistema.BuscarArticulo(22),
                _sistema.BuscarArticulo(12), _sistema.BuscarArticulo(3)}, FechaRandom()));
-            _sistema.AgregarPublicacion(new Venta("Verano en la Playa", Estado.ABIERTA,
+            _sistema.AgregarPublicacion(new Venta("Lo que no te puede faltar", Estado.ABIERTA,
                _sistema.BuscarUsuario("dgeymonat84@gmail.com"), false, new List<Articulo> {_sistema.BuscarArticulo(17), _sistema.BuscarArticulo(9),
                _sistema.BuscarArticulo(1), _sistema.BuscarArticulo(0)}, FechaRandom()));
 

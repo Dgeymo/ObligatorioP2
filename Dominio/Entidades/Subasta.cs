@@ -16,14 +16,14 @@
         {
             string respuesta = base.ToString();
             respuesta += $"Tipo: Subasta\n";
-            if (_ofertas.Count > 0)
-            {
-                respuesta += "\nOFERTAS:\n";
-                foreach (Oferta unaOferta in _ofertas)
-                {
-                    respuesta += unaOferta.ToString();
-                }
-            } 
+            //if (_ofertas.Count > 0)
+            //{
+            //    respuesta += "\nOFERTAS:\n";
+            //    foreach (Oferta unaOferta in _ofertas)
+            //    {
+            //        respuesta += unaOferta.ToString();
+            //    }
+            //} 
             return respuesta;
         }        
         public void CargarOferta(Oferta oferta)
