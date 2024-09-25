@@ -53,34 +53,99 @@ namespace Dominio
             return null!;
         }
 
-        //Bloque de muestra de listas como strings
+        
 
-        public List<string> MostrarUsuarios(bool admin)
+        public List<Usuario> MostrarUsuarios(bool admin)
         {
-            List<string> unaLista = new List<string>();
+            List<Usuario> unaLista = new List<Usuario>();
             
             foreach(Usuario usuario in _usuarios)
             {
                 if (usuario is Cliente && !admin)
                 {
-                    unaLista.Add(usuario.ToString());
+                    unaLista.Add(usuario);
                 }
                 else if(usuario is Administrador && admin)
                 {
-                    unaLista.Add(usuario.ToString());
+                    unaLista.Add(usuario);
                 }
             }
             return unaLista;
         }
-        public List<string> MostrarCategorias()
+        public List<Categoria> MostrarCategorias()
         {
-            List<string> listaCategorias = new List<string>();
-            for (int i = 0; i < _categorias.Count; i++)
-            {
-                listaCategorias.Add($"({i + 1}) " + _categorias[i].ToString());
-            }
-            return listaCategorias;
+            return _categorias;
         }
+        
+        public List<Publicacion> ListaPublicaciones(string tipo, Estado estado)
+        {
+            //if (estado.Equals(Estado.)) throw new Exception("No se ha cargado el estado en el parametro");
+            if (string.IsNullOrEmpty(tipo)) throw new Exception("No se ha cargado el tipo en el parametro");
+            List<Publicacion> publicaciones = new List<Publicacion>();
+
+            foreach (Publicacion unaPublicacion in _publicaciones) //.nombre == tipo.ToUpper())
+            {
+                if (tipo.ToUpper() == "TODOS")
+                {
+                    if (estado == unaPublicacion.EstadoPublicacion)
+                    {
+                        publicaciones.Add(unaPublicacion);
+                    }
+                    else if (estado.ToString() == "TODOS")
+                    {
+                        publicaciones.Add(unaPublicacion);
+                    }
+                }
+                else if (tipo.ToUpper() == "VENTA" && unaPublicacion is Venta)
+                {
+                    if (estado == unaPublicacion.EstadoPublicacion)
+                    {
+                        publicaciones.Add(unaPublicacion);
+                    }
+                    else if (estado.ToString() == "TODOS")
+                    {
+                        publicaciones.Add(unaPublicacion);
+                    }
+                }
+                else if (tipo.ToUpper() == "SUBASTA" && unaPublicacion is Subasta)
+                {
+                    if (estado == unaPublicacion.EstadoPublicacion)
+                    {
+                        publicaciones.Add(unaPublicacion);
+                    }
+                    else if (estado.ToString() == "TODOS")
+                    {
+                        publicaciones.Add(unaPublicacion);
+                    }
+                }
+            }
+            return publicaciones;
+        }
+
+        public List<Articulo> MostrarArticulos(string categoria)
+        {
+            List <Articulo> resultado = new List<Articulo>();
+            if (categoria.ToUpper() == "TODOS")
+            {
+                foreach (Articulo unArticulo in _articulos) resultado.Add(unArticulo);
+            }
+            else
+            {
+                foreach(Articulo unArticulo in _articulos)
+                {
+                    List<Categoria> categorias = new List<Categoria>();
+                    categorias = unArticulo.ObtenerCategorias();
+                    foreach (Categoria unaCategoria in categorias)
+                    {
+                        if (unaCategoria.Nombre == categoria)
+                            resultado.Add(unArticulo);
+                    }
+                }
+            }
+            return resultado;
+        }
+
+        //Bloque de muestra de listas como strings
         public List<string> MostrarCategoriasNombre()
         {
             List<string> listaCategorias = new List<string>();
@@ -90,76 +155,6 @@ namespace Dominio
             }
             return listaCategorias;
         }
-        public List<string> ListaPublicaciones(string tipo, Estado estado)
-        {
-            //if (estado.Equals(Estado.)) throw new Exception("No se ha cargado el estado en el parametro");
-            if (string.IsNullOrEmpty(tipo)) throw new Exception("No se ha cargado el tipo en el parametro");
-            List<string> publicaciones = new List<string>();
-
-            foreach (Publicacion unaPublicacion in _publicaciones) //.nombre == tipo.ToUpper())
-            {
-                if (tipo.ToUpper() == "TODOS")
-                {
-                    if (estado == unaPublicacion.EstadoPublicacion)
-                    {
-                        publicaciones.Add(unaPublicacion.ToString());
-                    }
-                    else if (estado.ToString() == "TODOS")
-                    {
-                        publicaciones.Add(unaPublicacion.ToString());
-                    }
-                }
-                else if (tipo.ToUpper() == "VENTA" && unaPublicacion is Venta)
-                {
-                    if (estado == unaPublicacion.EstadoPublicacion)
-                    {
-                        publicaciones.Add(unaPublicacion.ToString());
-                    }
-                    else if (estado.ToString() == "TODOS")
-                    {
-                        publicaciones.Add(unaPublicacion.ToString());
-                    }
-                }
-                else if (tipo.ToUpper() == "SUBASTA" && unaPublicacion is Subasta)
-                {
-                    if (estado == unaPublicacion.EstadoPublicacion)
-                    {
-                        publicaciones.Add(unaPublicacion.ToString());
-                    }
-                    else if (estado.ToString() == "TODOS")
-                    {
-                        publicaciones.Add(unaPublicacion.ToString());
-                    }
-                }
-            }
-            return publicaciones;
-        }
-
-        
-
-        public List<string> MostrarArticulos(string categoria)
-        {
-            List <string> resultado = new List<string>();
-            if (categoria.ToUpper() == "TODOS")
-            {
-                foreach (Articulo unArticulo in _articulos) resultado.Add(unArticulo.ToString());
-            }
-            else
-            {
-                foreach(Articulo unArticulo in _articulos)
-                {
-                    List<Categoria> categorias = new List<Categoria>();
-                    categorias = unArticulo.ObtenerCategorias();
-                    foreach(Categoria unaCategoria in categorias)
-                    {
-                        if (unaCategoria.Nombre == categoria)
-                            resultado.Add(unArticulo.ToString());
-                    }
-                }
-            }
-            return resultado;
-        }
-        
         //Bloque de Add en las listas
         public void AgregarArticulo(Articulo nuevoArticulo)
         {

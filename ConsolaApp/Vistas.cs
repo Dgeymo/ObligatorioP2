@@ -63,16 +63,19 @@ namespace ConsolaApp
                 case 0:
                     VerPublicaciones("Todas las publicaciones", "todos", Estado.TODOS);
                     TextoColor("yellow", "Presione cualquier tecla para continuar...");
+                    Console.ReadKey();
                     ListarPublicaciones();
                     break;
                 case 1:
                     VerPublicaciones("VENTAS", "venta", Estado.TODOS);
                     TextoColor("yellow", "Presione cualquier tecla para continuar...");
+                    Console.ReadKey();
                     ListarPublicaciones();
                     break;
                 case 2:
                     VerPublicaciones("SUBASTAS", "subasta", Estado.TODOS);
                     TextoColor("yellow", "Presione cualquier tecla para continuar...");
+                    Console.ReadKey();
                     ListarPublicaciones();
                     break;
                 case 3:
@@ -86,10 +89,10 @@ namespace ConsolaApp
         {
             Console.Clear();
             Console.WriteLine(titulo);
-            List<string> ventas = _sistema.ListaPublicaciones(tipo, estado);
+            List<Publicacion> ventas = _sistema.ListaPublicaciones(tipo, estado);
             for (int i = 0; i < ventas.Count; i++)
             {
-                Console.WriteLine(ventas[i]);
+                Console.WriteLine(ventas[i].ToString());
             }
         }
 
@@ -108,24 +111,26 @@ namespace ConsolaApp
         {
             Console.Clear();
             Console.WriteLine("CLIENTES\n");
-            List<string> listaUsuarios = new(_sistema.MostrarUsuarios(false));
-            foreach (string usuario in listaUsuarios)
+            List<Usuario> listaUsuarios = new(_sistema.MostrarUsuarios(false));
+            foreach (Usuario usuario in listaUsuarios)
             {
                 Console.WriteLine(usuario.ToString() + "\n");
             }
             TextoColor("yellow", "Presione cualquier tecla para continuar...");
+            Console.ReadKey();
             AdministrarClientes();
         }
         private static void ListarAdministradores()
         {
             Console.Clear();
             Console.WriteLine("ADMINISTRADORES\n");
-            List<string> listaUsuarios = new(_sistema.MostrarUsuarios(true));
-            foreach (string usuario in listaUsuarios)
+            List<Usuario> listaUsuarios = new(_sistema.MostrarUsuarios(true));
+            foreach (Usuario usuario in listaUsuarios)
             {
                 Console.WriteLine(usuario.ToString() + "\n");
             }
             TextoColor("yellow", "Presione cualquier tecla para continuar...");
+            Console.ReadKey();
             AdministrarClientes();
         }
 
@@ -158,12 +163,13 @@ namespace ConsolaApp
         private static void ListarProductosTodos()
         {
             Console.Clear();
-            List<string> lista = new(_sistema.MostrarArticulos("TODOS"));
-            foreach (string unArticulo in lista)
+            List<Articulo> lista = new(_sistema.MostrarArticulos("TODOS"));
+            foreach (Articulo unArticulo in lista)
             {
-                Console.WriteLine(unArticulo);
+                Console.WriteLine(unArticulo.ToString());
             }
             TextoColor("yellow", "Presione cualquier tecla para continuar...");
+            Console.ReadKey();
             ListarProductos();
         }
         private static void ListarProductosFiltrado()
@@ -176,13 +182,14 @@ namespace ConsolaApp
             int opcion = ConstructorMenu(categorias.ToArray());
             if (opcion == categorias.Count - 1) ListarProductos();
             categorias = _sistema.MostrarCategoriasNombre();
-            List<string> articulos = new(_sistema.MostrarArticulos(categorias[opcion]));
+            List<Articulo> articulos = new(_sistema.MostrarArticulos(categorias[opcion]));
             Console.Clear();
-            foreach (string articulo in articulos)
+            foreach (Articulo articulo in articulos)
             {
-                Console.WriteLine(articulo);
+                Console.WriteLine(articulo.ToString());
             }
             TextoColor("yellow", "Presione cualquier tecla para continuar...");
+            Console.ReadKey();
             ListarProductos();
         }
         private static void AgregarProducto()
@@ -191,61 +198,49 @@ namespace ConsolaApp
             Console.WriteLine("AGREGAR ARTICULO NUEVO");
             List<string> categorias = new();
             categorias = SeleccionarCategorias(categorias);
-            categorias = LimpiarRepetidos(categorias);
-            Console.Clear();
-            Console.WriteLine("Ingrese un nombre para el artículo:");
-            string nombre = Console.ReadLine();
-            bool flag = false;
-            decimal precio = 0;
-            do
+            if (categorias.Count > 0)
             {
-                try
+                TextoColor("yellow", $"Categoría elegida: {categorias[0]}");
+                Console.WriteLine($"Ingrese un nombre para el artículo:");
+                string nombre = Console.ReadLine();
+                bool flag = false;
+                decimal precio = 0;
+                do
                 {
-                    Console.WriteLine("Ingrese un precio para el articulo:");
-                    precio = int.Parse(Console.ReadLine());
-                    flag = true;
-                }
-                catch (Exception)
-                {
-                    TextoColor("red", "Ingrese solo numeros!!! Presione cualquier tecla para continuar....");
-                }
-            } while (!flag);
-            AceptarArticulo(categorias, nombre, precio);
+                    try
+                    {
+                        Console.WriteLine("Ingrese un precio para el articulo:");
+                        precio = int.Parse(Console.ReadLine());
+                        flag = true;
+                    }
+                    catch (Exception)
+                    {
+                        TextoColor("red", "Ingrese solo numeros!!! Presione cualquier tecla para continuar....");
+                        Console.ReadKey();
+                    }
+                } while (!flag);
+                AceptarArticulo(categorias, nombre, precio);
+            }
         }
         private static List<string> SeleccionarCategorias(List<string> categorias)
         {
             int opcion;
             List<string> listaCategorias = new(_sistema.MostrarCategoriasNombre());
-            listaCategorias.Add("Terminar");
-            do
+            listaCategorias.Add("Cancelar");
+            Console.Clear();
+            Console.WriteLine("Seleccione una categoria para agregar al nuevo artículo");
+            opcion = ConstructorMenu(listaCategorias.ToArray());
+            string categoria = listaCategorias[opcion];
+            if (opcion != listaCategorias.Count - 1)
             {
-                Console.Clear();
-                if (categorias.Count > 0)
-                {
-                    Console.WriteLine("CATEGORIAS SELECCIONADAS :");
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    foreach (string laCategoria in categorias)
-                    {
-                        Console.WriteLine(laCategoria);
-                    }
-                    Console.ForegroundColor = ConsoleColor.White;
-                }
-                Console.WriteLine("Seleccione una categoria para agregar al nuevo artículo");
-                opcion = ConstructorMenu(listaCategorias.ToArray());
-                string categoria = listaCategorias[opcion];
                 Categoria unaCategoria = _sistema.BuscarCategoria(categoria);
-                if (opcion != listaCategorias.Count - 1) categorias.Add(unaCategoria.Nombre);
-            } while (opcion != listaCategorias.Count - 1);
-            return categorias;
-        }
-        private static List<string> LimpiarRepetidos(List<string> listaRepetidos)
-        {
-            List<string> ret = new List<string>();
-            foreach (string unaCat in listaRepetidos)
-            {
-                if (ret.IndexOf(unaCat) == -1) ret.Add(unaCat);
+                categorias.Add(unaCategoria.Nombre);
             }
-            return ret;
+            else
+            {
+                AdministrarCategorias();
+            }
+            return categorias;
         }
         private static void AceptarArticulo(List<string> categorias, string nombre, decimal precio)
         {
@@ -261,7 +256,7 @@ namespace ConsolaApp
             }
             cat += "\n";
             Console.WriteLine(cat);
-            Console.ForegroundColor= ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.White;
             List<Categoria> lasCategorias = new List<Categoria>();
             foreach (string categoria in categorias)
             {
@@ -277,13 +272,13 @@ namespace ConsolaApp
             }
             else if (opcion == 1 && !string.IsNullOrEmpty(nombre) && categorias.Count > 0 && precio > 0)
             {
-                Console.WriteLine("Cancelado. Presione cualquier tecla para continuar...");
+                TextoColor("yellow", "Cancelado. Presione cualquier tecla para continuar...");
                 Console.ReadKey();
                 AdministrarProductos();
             }
             else
             {
-                Console.WriteLine("Cancelado. Campo Categorias/Nombre vacias o precio incorrecto. Presione cualquier tecla para continuar...");
+                TextoColor("yellow", "Cancelado. Campo Categorias/Nombre vacias o precio incorrecto. Presione cualquier tecla para continuar...");
                 Console.ReadKey();
                 AdministrarProductos();
             }
@@ -317,7 +312,7 @@ namespace ConsolaApp
                         if (descripcion != "0")
                         {
                             Categoria nuevaCategoria = new Categoria(titulo, descripcion);
-                            Program._sistema.AgregarCategoria(nuevaCategoria);
+                            _sistema.AgregarCategoria(nuevaCategoria);
                         }
                     }
                     flag = true;
@@ -334,12 +329,15 @@ namespace ConsolaApp
         {
             Console.Clear();
             Console.WriteLine("CATEGORÍAS\n");
-            List<string> lista = _sistema.MostrarCategorias();
-            for (int i = 0; i < lista.Count; i++)
+            List<Categoria> lista = _sistema.MostrarCategorias();
+            int contador = 1;
+            foreach (Categoria unaCategoria in lista)
             {
-                Console.WriteLine(lista[i]);
+                Console.WriteLine($"({contador}) " + unaCategoria.ToString());
+                contador++;
             }
             TextoColor("yellow", "Presione cualquier tecla para continuar...");
+            Console.ReadKey();
             AdministrarCategorias();
         }
 
@@ -430,7 +428,7 @@ namespace ConsolaApp
             }
             Console.WriteLine(mensaje);
             Console.ForegroundColor = ConsoleColor.White;
-            Console.ReadKey();
+            //Console.ReadKey();
         }
     }
 }
