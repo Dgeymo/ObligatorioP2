@@ -1,7 +1,9 @@
 ﻿
+using Dominio.Interfaces;
+
 namespace Dominio.Entidades
 {
-    public abstract class Usuario
+    public abstract class Usuario:IValidable
     {
         public int Id { get; set; }
         public string Nombre { get; set; }

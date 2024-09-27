@@ -1,6 +1,8 @@
-﻿namespace Dominio.Entidades
+﻿using Dominio.Interfaces;
+
+namespace Dominio.Entidades
 {
-    public abstract class Publicacion
+    public abstract class Publicacion:IValidable
     {
 
         private List<Articulo> _articulos = new List<Articulo>();

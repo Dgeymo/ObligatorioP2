@@ -9,8 +9,7 @@ namespace ConsolaApp
         {
             try
             {
-                PreCarga.PreCargas();
-                //_sistema.MostrarPrecargas(); //NO SE DEBE INCLUIR EN PROYECTO FINAL
+               _sistema.PreCargas();             
                 Vistas.MenuInicio(); //MENU DEL PROGRAMA
             }
             catch (Exception e)

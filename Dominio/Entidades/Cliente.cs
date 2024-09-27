@@ -1,6 +1,8 @@
-﻿namespace Dominio.Entidades
+﻿using Dominio.Interfaces;
+
+namespace Dominio.Entidades
 {
-    public class Cliente : Usuario
+    public class Cliente : Usuario,IValidable
     {
         public decimal SaldoBilletera { get; set; }
 

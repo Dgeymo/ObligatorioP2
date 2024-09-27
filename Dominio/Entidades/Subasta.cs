@@ -1,4 +1,6 @@
-﻿namespace Dominio.Entidades
+﻿using Dominio.Interfaces;
+
+namespace Dominio.Entidades
 {
     public class Subasta : Publicacion
     {
