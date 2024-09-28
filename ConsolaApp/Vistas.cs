@@ -167,6 +167,9 @@ namespace ConsolaApp
                 {
                     Console.WriteLine(oferta.ToString());
                 }
+                TextoColor("yellow", "Presione cualquier tecla para continuar...");
+                Console.ReadKey();
+                ListarPublicaciones();
             }
         }
         private static void VerPublicaciones(string titulo, string tipo, Estado estado)

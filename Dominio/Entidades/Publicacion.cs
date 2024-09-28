@@ -41,12 +41,12 @@ namespace Dominio.Entidades
                 $"Fecha Publicación: {FechaPublicacion.ToShortDateString()}\n";
             if (EstadoPublicacion == Estado.CERRADA) respuesta += $"Fecha Finalizado: {FechaFinalizado.ToShortDateString()}\n";
             respuesta += $"ARTICULOS:\n";
-            for (int i = 0; i < _articulos.Count; i++)
+            foreach (Articulo unArticulo in _articulos)
             {
-                respuesta += $"Id: {_articulos[i].Id} " +
-                    $"{_articulos[i].Nombre} " +
-                    $"${_articulos[i].Precio}\n";
-                precioPublicacion += _articulos[i].Precio;
+                respuesta += $"Id: {unArticulo.Id} " +
+                    $"{unArticulo.Nombre} " +
+                    $"${unArticulo.Precio}\n";
+                precioPublicacion += unArticulo.Precio;
             }
             respuesta += $"Total de la publicación: ${precioPublicacion}\n";
             return respuesta;
@@ -70,6 +70,11 @@ namespace Dominio.Entidades
                 throw new Exception("Datos incorrectos al intentar ingresar la PUBLICACIÓN.");
             }
             if (_articulos.Count == 0) throw new Exception("Debe seleccionar al menos un artículo para la publicacion");
+            if (FechaPublicacion > DateTime.Now) throw new Exception("La fecha de publicacion no puede ser mayor a la actual.");
+            foreach(Articulo unArticulo in _articulos)
+            {
+                if (unArticulo == null) throw new Exception("Articulo mal ingresado");
+            }
         }
     }
 }

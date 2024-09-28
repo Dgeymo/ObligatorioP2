@@ -26,7 +26,7 @@ namespace Dominio.Entidades
 
         public void Validar()
         {
-            if (String.IsNullOrEmpty(Nombre)) throw new Exception("En nombre no puede ser vacio o nulo");
+            if (String.IsNullOrEmpty(Nombre)) throw new Exception("El nombre no puede ser vacio o nulo");
             if (UnaCategoria == null) throw new Exception("La categoria no puede ser nula");
             if (Precio <= 0) throw new Exception("El precio no puede ser cero o negativo");
         }

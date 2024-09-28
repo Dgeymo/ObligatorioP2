@@ -27,6 +27,7 @@ namespace Dominio.Entidades
         public void Validar()
         {
             if (Precio < 0) throw new Exception("El precio no puede ser menor que cero");
+            if (Usuario == null) throw new Exception("El mail ingresado no corresponde a un cliente válido.");
         }
     }
 }
