@@ -206,22 +206,7 @@ namespace ConsolaApp
         {
             Console.Clear();
             Console.WriteLine("CONFIRMAR ARTICULO NUEVO");
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine($"\nNOMBRE : {nombre.ToUpper()}");
-            Console.WriteLine($"PRECIO : {precio}");
-            string cat = "CATEGORIAS :";
-            //foreach (string categoria in categorias)
-            //{
-            cat += " " + categoria + " ";
-            //}
-            cat += "\n";
-            Console.WriteLine(cat);
-            Console.ForegroundColor = ConsoleColor.White;
-            //Categoria Categoria 
-            // foreach (string categoria in categorias)
-            // {
-            //     lasCategorias.Add();
-            // }
+            TextoColor("yellow",$"\nNOMBRE : {nombre.ToUpper()}\nPRECIO : {precio}\nCATEGORIA : {categoria}\n");
             int opcion = ConstructorMenu(["ACEPTAR", "CANCELAR"]);
             if (opcion == 0 && !string.IsNullOrEmpty(nombre) && precio > 0) //&& categorias.Count > 0
             {
@@ -236,7 +221,7 @@ namespace ConsolaApp
                 Console.ReadKey();
                 AdministrarProductos();
             }
-            else
+            else if (opcion == 0 || string.IsNullOrEmpty(nombre) || precio <= 0)
             {
                 TextoColor("yellow", "Cancelado. Campo Categorias/Nombre vacias o precio incorrecto. Presione cualquier tecla para continuar...");
                 Console.ReadKey();
