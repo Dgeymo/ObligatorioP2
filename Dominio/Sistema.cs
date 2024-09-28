@@ -106,10 +106,10 @@ namespace Dominio
             AgregarPublicacion(new Venta("Mantente saludable", Estado.ABIERTA,
                BuscarUsuario("dgeymonat84@gmail.com"), false, new List<Articulo> {BuscarArticulo(46), BuscarArticulo(13),
                BuscarArticulo(7)}, FechaRandom()));
-            AgregarPublicacion(new Venta("Para cuidar tu cuerpo", Estado.ABIERTA,
+            AgregarPublicacion(new Venta("Para cuidar tu cuerpo", Estado.CERRADA,
                BuscarUsuario("dgeymonat84@gmail.com"), false, new List<Articulo> {BuscarArticulo(43), BuscarArticulo(35),
                BuscarArticulo(2), BuscarArticulo(32)}, FechaRandom()));
-            AgregarPublicacion(new Venta("Para quedarte en casa", Estado.ABIERTA,
+            AgregarPublicacion(new Venta("Para quedarte en casa", Estado.CANCELADA,
                BuscarUsuario("dgeymonat84@gmail.com"), false, new List<Articulo> {BuscarArticulo(41), BuscarArticulo(8),
                BuscarArticulo(10)}, FechaRandom()));
             AgregarPublicacion(new Venta("Cultiva tu mente", Estado.ABIERTA,

@@ -29,12 +29,9 @@ namespace Dominio.Entidades
             return respuesta;
         }
         
-        public void MostrarOfertas()
+        public List<Oferta> MostrarOfertas()
         {
-            foreach(Oferta oferta in _ofertas)
-            {
-                Console.WriteLine(oferta.ToString());
-            }
+            return _ofertas;
         }
         public void CargarOferta(Oferta oferta)
         {

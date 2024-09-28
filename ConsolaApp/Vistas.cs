@@ -12,17 +12,22 @@ namespace ConsolaApp
         {
             Console.Clear(); //comentar para ver precargas         
             ImprimirLogo();
-            int opcion = ConstructorMenu(["Usuario", "Administrador", "Salir"]);
+            int opcion = ConstructorMenu(["Ingresar PRECARGAS", "Administrador", "Salir"]);
             lista.Clear();
-            lista.Add(MenuUsuario);
+            lista.Add(PreCargar);
             lista.Add(MenuAdministracion);
             lista.Add(Salir);
             lista[opcion]();
         }
-        private static void MenuUsuario()
+
+        private static void PreCargar()
         {
-            EnConstruccion();
+            _sistema.PreCargar();
+            TextoColor("green", "Precargas ingresadas. Presione cualquier tecla para continuar...");
+            Console.ReadKey();
+            MenuInicio();
         }
+      
         private static void MenuAdministracion()
         {
             Console.Clear();
@@ -54,7 +59,7 @@ namespace ConsolaApp
         {
             Console.Clear();
             Console.WriteLine("PUBLICACIONES");
-            string[] opciones = ["Todas las publicaciones", "Ventas", "Subastas", "Ofertas de las SUBASTAS", "Volver"];
+            string[] opciones = ["Todas las publicaciones", "Ventas", "Subastas", "Ofertas de las SUBASTAS", "Listar entre fechas","Volver"];
             int opcion = ConstructorMenu(opciones);
             switch (opcion)
             {
@@ -80,12 +85,64 @@ namespace ConsolaApp
                     OfertasSubastas();
                     break;
                 case 4:
+                    ListarEntreFechas();
+                    break;
+                case 5:
                     AdministrarPublicaciones();
                     break;
                 default:
                     break;
             }
         }
+
+        private static void ListarEntreFechas()
+        {
+            List<Publicacion> publicaciones = new List<Publicacion>(_sistema.ListaPublicaciones("TODOS", Estado.TODOS));
+            Console.Clear();
+            Console.WriteLine("Filtrar Publicaciones entre dos fechas.");
+            Console.WriteLine("Ingrese una fecha de inicio (DD/MM/YYYY).");
+            DateTime fechaIncio = ObtenerFecha();
+            Console.WriteLine("Ingrese una fecha final (DD/MM/YYYY).");
+            DateTime fechaFinal = ObtenerFecha();
+            DateTime fechaMayor = fechaIncio;
+            if(fechaIncio > fechaFinal)
+            {
+                fechaIncio = fechaFinal;
+                fechaFinal = fechaMayor;
+            }
+            foreach(Publicacion publicacion in publicaciones)
+            {
+                if(publicacion.FechaPublicacion >= fechaIncio && publicacion.FechaPublicacion <= fechaFinal)
+                {
+                    string tipo = publicacion.GetType().Name;
+                    Console.WriteLine($"ID: {publicacion.Id}\nTIPO: {tipo}\nESTADO: {publicacion.EstadoPublicacion}\n" +
+                        $"FECHA DE PUBLICACION: {publicacion.FechaPublicacion.ToShortDateString()}\n");
+                }
+            }
+            TextoColor("yellow", "Presione cualquier tecla para continuar...");
+            Console.ReadKey();
+            AdministrarPublicaciones();
+        }
+
+        private static DateTime ObtenerFecha()
+        {
+            DateTime fecha = DateTime.Now;
+            bool flag = false;
+            do
+            {
+                try
+                {
+                    fecha = DateTime.Parse(Console.ReadLine());
+                    flag = true;
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Ingrese un fecha válida en formato DD/MM/YYYY");
+                }
+            }while(!flag);
+            return fecha;
+        }
+
         private static void OfertasSubastas()
         {
             Console.Clear();
@@ -97,10 +154,13 @@ namespace ConsolaApp
             }
             nombres.Add("Volver");
             int opcion = ConstructorMenu(nombres.ToArray());
-            if (opcion == nombres.Count - 1) ListarPublicaciones();
+            if (opcion == nombres.Count - 1) ListarPublicaciones(); //opcion de volver
             Subasta publicacion = ventas[opcion] as Subasta;
-            publicacion.MostrarOfertas();
-
+            List<Oferta> ofertas = publicacion.MostrarOfertas();
+            foreach(Oferta oferta in ofertas)
+            {
+                Console.WriteLine(oferta.ToString());
+            }
         }
         private static void VerPublicaciones(string titulo, string tipo, Estado estado)
         {
