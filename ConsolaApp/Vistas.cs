@@ -197,7 +197,7 @@ namespace ConsolaApp
                 TextoColor("yellow", $"Categoría elegida: {categoria}");
                 Console.WriteLine("Ingrese un nombre para el artículo:");
                 string nombre = Console.ReadLine()!;
-                decimal precio = PedirNumero("Ingrese un precio para el articulo:", 10);
+                decimal precio = PedirNumero("Ingrese un precio para el articulo:", 11);
                 AceptarArticulo(categoria, nombre, precio);
             }
             else
@@ -409,7 +409,7 @@ namespace ConsolaApp
             {
                 try
                 {
-                    if (opciones > 9)
+                    if (opciones > 10)
                     {
                         Console.WriteLine(titulo);
                         numero = int.Parse(Console.ReadLine()!);

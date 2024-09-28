@@ -11,7 +11,7 @@ namespace Dominio.Entidades
                        bool oferta,
                        List<Articulo> articulos,
                        DateTime fechaPublicacion
-                     ) : base(nombre, estado, usuario, oferta, articulos,fechaPublicacion)
+                     ) : base(nombre, estado, usuario, articulos,fechaPublicacion)
         {
         }
         public override string ToString()
