@@ -15,11 +15,10 @@ namespace Dominio.Entidades
         public Estado EstadoPublicacion { get; set; }
         public Usuario Usuario { get; set; }
 
-        public bool Oferta = false;
+   
         public Publicacion(string nombre,
                         Estado estado,
-                        Usuario usuario,
-                        bool oferta,
+                        Usuario usuario,                     
                         List<Articulo> articulos,
                         DateTime fechaPublicacion)
         {
@@ -27,7 +26,7 @@ namespace Dominio.Entidades
             Nombre = nombre;
             EstadoPublicacion = estado;
             Usuario = usuario;
-            Oferta = oferta;
+      
             _articulos = articulos;
             FechaPublicacion = fechaPublicacion;
         }

@@ -9,22 +9,22 @@ namespace Dominio
         private List<Categoria> _categorias = new List<Categoria>();
 
         #region "PRE CARGAS DEL SISTEMA"
-        public void PreCargas()
+        public void PreCargar()
         {
-            PrecargaUsuarios();
-            PrecargaCategoria();
-            PrecargaArticulo();
-            PrecargaPublicaciones();
-            PreCargaOfertas();
+            PrecargarUsuarios();
+            PrecargarCategoria();
+            PrecargarArticulo();
+            PrecargarPublicaciones();
+            PrecargarOfertas();
         }
-        private void PrecargaUsuarios()
+        private void PrecargarUsuarios()
         {
             AgregarUsuario(new Cliente("Diego", "Geymonat", "dgeymonat84@gmail.com", "Geymon4t", 135000));
             AgregarUsuario(new Cliente("Ernaldo", "Rodriguez", "ernaldo.rodriguez.dev@gmail.com", "1234", 150000));
             AgregarUsuario(new Administrador("Diego", "Geymonat", "dgeymonat85@gmail.com", "Geymon4t"));
             AgregarUsuario(new Administrador("Ernaldo", "Rodriguez", "ernaldo.rodriguez.dev1@gmail.com", "1234"));
         }
-        private void PrecargaCategoria()
+        private void PrecargarCategoria()
         {
             AgregarCategoria(new Categoria("Deportes", "Todo lo necesario para el deporte"));
             AgregarCategoria(new Categoria("Indumentaria", "Distintas prendas para distintas ocasiones"));
@@ -35,7 +35,7 @@ namespace Dominio
             AgregarCategoria(new Categoria("Entretenimiento", "Para tu tiempo libre"));
             AgregarCategoria(new Categoria("Educación", "Para crecer y aprender"));
         }
-        private void PrecargaArticulo()
+        private void PrecargarArticulo()
         {
             AgregarArticulo(new Articulo("Zapatillas de correr", BuscarCategoria("Indumentaria"), 80));
             AgregarArticulo(new Articulo("Camiseta de fútbol", BuscarCategoria("Indumentaria"), 25));
@@ -88,7 +88,7 @@ namespace Dominio
             AgregarArticulo(new Articulo("Tenis", BuscarCategoria("Indumentaria"), 70));
             AgregarArticulo(new Articulo("Kit de programación", BuscarCategoria("Educación"), 120));
         }
-        private void PrecargaPublicaciones()
+        private void PrecargarPublicaciones()
         {
             //VENTAS
             AgregarPublicacion(new Venta("Verano en la Playa", Estado.ABIERTA,
@@ -125,7 +125,7 @@ namespace Dominio
                BuscarUsuario("dgeymonat84@gmail.com"), false, new List<Articulo> {BuscarArticulo(4), BuscarArticulo(6),
                BuscarArticulo(9), BuscarArticulo(45)}, FechaRandom()));
         }
-        private void PreCargaOfertas()
+        private void PrecargarOfertas()
         {
             Subasta unaPublicacion = BuscarPublicacionSubasta(10);
             unaPublicacion.CargarOferta(new Oferta(BuscarUsuario("ernaldo.rodriguez.dev1@gmail.com"), 1334));
@@ -135,7 +135,7 @@ namespace Dominio
         public static DateTime FechaRandom()
         {
             bool flag = false;
-            DateTime fecha = new DateTime();
+            DateTime fecha;
             do
             {
                 int anio = new Random().Next(2022, 2024);
@@ -217,7 +217,6 @@ namespace Dominio
         {
             return _categorias;
         }
-
         public List<Publicacion> ListaPublicaciones(string tipo, Estado estado)
         {
             if (string.IsNullOrEmpty(tipo)) throw new Exception("No se ha cargado el tipo en el parametro");
@@ -261,7 +260,6 @@ namespace Dominio
             }
             return publicaciones;
         }
-
         public List<Articulo> MostrarArticulos(string categoria)
         {
             List<Articulo> resultado = new List<Articulo>();
@@ -273,19 +271,13 @@ namespace Dominio
             {
                 foreach (Articulo unArticulo in _articulos)
                 {
-                    List<Categoria> categorias = new List<Categoria>();
-                    categorias = unArticulo.ObtenerCategorias();
-                    foreach (Categoria unaCategoria in categorias)
-                    {
-                        if (unaCategoria.Nombre == categoria)
-                            resultado.Add(unArticulo);
-                    }
+                    if (unArticulo.UnaCategoria.Nombre == categoria) resultado.Add(unArticulo);
                 }
             }
             return resultado;
         }
 
-  
+
         //Bloque de Add en las listas
         public void AgregarArticulo(Articulo nuevoArticulo)
         {

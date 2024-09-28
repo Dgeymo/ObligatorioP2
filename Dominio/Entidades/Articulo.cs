@@ -9,8 +9,6 @@ namespace Dominio.Entidades
         private static int _ultimoId;
         public string Nombre { get; set; }
         public Categoria UnaCategoria { get; set; }
-
-
         public decimal Precio { get; set; }
 
         public Articulo(string nombre, Categoria categoria, decimal precio)
@@ -28,16 +26,11 @@ namespace Dominio.Entidades
 
         public void Validar()
         {
-            //TODO: falta validar Articulos
+            if (String.IsNullOrEmpty(Nombre)) throw new Exception("En nombre no puede ser vacio o nulo");
+            if (UnaCategoria == null) throw new Exception("La categoria no puede ser nula");
+            if (Precio <= 0) throw new Exception("El precio no puede ser cero o negativo");
         }
 
-        public List<Categoria> ObtenerCategorias()
-        {
-            List<Categoria> _aux = new List<Categoria>();
-
-
-            return _aux;
-
-        }
+       
     }
 }

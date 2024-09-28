@@ -9,7 +9,7 @@ namespace ConsolaApp
         {
             try
             {
-               _sistema.PreCargas();             
+               _sistema.PreCargar();             
                 Vistas.MenuInicio(); //MENU DEL PROGRAMA
             }
             catch (Exception e)

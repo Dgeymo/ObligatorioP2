@@ -27,10 +27,10 @@ namespace ConsolaApp
         {
             Console.Clear();
             Console.WriteLine("HERRAMIENTAS ADMINISTRATIVAS");
-            int opcion = ConstructorMenu(["Categorias", "Productos", "Clientes", "Publicaciones", "Volver"]);
+            int opcion = ConstructorMenu(["Categorias", "Articulos", "Clientes", "Publicaciones", "Volver"]);
             lista.Clear();
             lista.Add(AdministrarCategorias);
-            lista.Add(AdministrarProductos);
+            lista.Add(AdministrarArticulos);
             lista.Add(AdministrarClientes);
             lista.Add(AdministrarPublicaciones);
             lista.Add(MenuInicio);
@@ -130,31 +130,31 @@ namespace ConsolaApp
             Console.ReadKey();
             AdministrarClientes();
         }
-        private static void AdministrarProductos()
+        private static void AdministrarArticulos()
         {
             Console.Clear();
-            Console.WriteLine("ADMINISTRACION DE PRODUCTOS");
-            int opcion = ConstructorMenu(["Listar productos", "Agregar producto", "Modificar producto",
+            Console.WriteLine("ADMINISTRACION DE ARTICULOS");
+            int opcion = ConstructorMenu(["Listar", "Agregar", "Modificar",
                 "Volver"]);
             lista.Clear();
-            lista.Add(ListarProductos);
-            lista.Add(AgregarProducto);
+            lista.Add(ListarArticulos);
+            lista.Add(AgregarArticulos);
             lista.Add(EnConstruccion);
             lista.Add(MenuAdministracion);
             lista[opcion]();
         }
-        private static void ListarProductos()
+        private static void ListarArticulos()
         {
             Console.Clear();
-            Console.WriteLine("LISTAR PRODUCTOS");
-            int opcion = ConstructorMenu(["Todos los productos", "Por categoria", "Volver"]);
+            Console.WriteLine("LISTAR ARTÍCULOS");
+            int opcion = ConstructorMenu(["Todos", "Por categoria", "Volver"]);
             lista.Clear();
-            lista.Add(ListarProductosTodos);
-            lista.Add(ListarProductosFiltrado);
-            lista.Add(AdministrarProductos);
+            lista.Add(ListarArticulosTodos);
+            lista.Add(ListarArticulosFiltrado);
+            lista.Add(AdministrarArticulos);
             lista[opcion]();
         }
-        private static void ListarProductosTodos()
+        private static void ListarArticulosTodos()
         {
             Console.Clear();
             List<Articulo> lista = new(_sistema.MostrarArticulos("TODOS"));
@@ -164,17 +164,17 @@ namespace ConsolaApp
             }
             TextoColor("yellow", "Presione cualquier tecla para continuar...");
             Console.ReadKey();
-            ListarProductos();
+            ListarArticulos();
         }
-        private static void ListarProductosFiltrado()
+        private static void ListarArticulosFiltrado()
         {
             Console.Clear();
-            Console.WriteLine("LISTAR PRODUCTOS POR CATEGORIA");
+            Console.WriteLine("LISTAR ARTICULOS POR CATEGORIA");
             Console.WriteLine("Seleccione una categoria");
             List<string> categorias = new(MostrarCategoriasNombre());
             categorias.Add("Volver");
             int opcion = ConstructorMenu(categorias.ToArray());
-            if (opcion == categorias.Count - 1) ListarProductos();
+            if (opcion == categorias.Count - 1) ListarArticulos();
             categorias = MostrarCategoriasNombre();
             List<Articulo> articulos = new(_sistema.MostrarArticulos(categorias[opcion]));
             Console.Clear();
@@ -184,9 +184,9 @@ namespace ConsolaApp
             }
             TextoColor("yellow", "Presione cualquier tecla para continuar...");
             Console.ReadKey();
-            ListarProductos();
+            ListarArticulos();
         }
-        private static void AgregarProducto()
+        private static void AgregarArticulos()
         {
             Console.Clear();
             Console.WriteLine("AGREGAR ARTICULO NUEVO");
@@ -202,7 +202,7 @@ namespace ConsolaApp
             }
             else
             {
-            AdministrarProductos();
+                AdministrarArticulos();
             }
         }
         private static void AceptarArticulo(string categoria, string nombre, decimal precio)
@@ -214,21 +214,21 @@ namespace ConsolaApp
             if (opcion == 0 && !string.IsNullOrEmpty(nombre) && precio > 0) //&& categorias.Count > 0
             {
                 _sistema.AgregarArticulo(new Articulo(nombre, _sistema.BuscarCategoria(categoria), precio));
-                Console.WriteLine("Producto agregado correctamente. Presione cualquier tecla para continuar");
+                Console.WriteLine("Producto agregado correctamente. Presione cualquier tecla para continuar...");
                 Console.ReadKey();
-                AdministrarProductos();
+                AdministrarArticulos();
             }
             else if (opcion != 0 && !string.IsNullOrEmpty(nombre) && precio > 0) // && categorias.Count > 0
             {
                 TextoColor("yellow", "Cancelado. Presione cualquier tecla para continuar...");
                 Console.ReadKey();
-                AdministrarProductos();
+                AdministrarArticulos();
             }
             else if (opcion == 0 || string.IsNullOrEmpty(nombre) || precio <= 0)
             {
                 TextoColor("yellow", "Cancelado. Campo Categorias/Nombre vacias o precio incorrecto. Presione cualquier tecla para continuar...");
                 Console.ReadKey();
-                AdministrarProductos();
+                AdministrarArticulos();
             }
         }
         private static string SeleccionarCategorias(List<Categoria> categorias)
@@ -366,7 +366,6 @@ namespace ConsolaApp
         }
         private static void ImprimirLogo()
         {
-            //Console.WriteLine("OBLIGATORIO P2\n==============");  
             string C = "█";//alt+219
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("\n\t=============================");
@@ -424,7 +423,7 @@ namespace ConsolaApp
                 }
                 catch (Exception)
                 {
-                    TextoColor("red", "Ingrese solo numeros!!! Presione cualquier tecla para continuar...1.");
+                    TextoColor("red", "Ingrese solo numeros!!! Presione cualquier tecla para continuar...");
                 }
             } while (!flag);
             return numero;

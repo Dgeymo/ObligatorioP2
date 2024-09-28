@@ -2,6 +2,7 @@
 {
     public class Venta : Publicacion
     {
+        public bool Oferta = false;
         public Venta(string nombre,
                         Estado estado,
                         Usuario usuario,
@@ -10,11 +11,10 @@
                         DateTime fechaPublicacion) : base(nombre,
                                                            estado,
                                                            usuario,
-                                                           oferta,
                                                            articulos,
                                                            fechaPublicacion)
         {
-
+            Oferta = oferta;
         }
         public override string ToString()
         {
