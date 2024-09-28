@@ -192,14 +192,15 @@ namespace ConsolaApp
             Console.WriteLine("AGREGAR ARTICULO NUEVO");
 
             string categoria = SeleccionarCategorias(_sistema.MostrarCategorias());
-            //if (categorias.Count > 0)
-            //{
-            TextoColor("yellow", $"Categoría elegida: {categoria}");
-            Console.WriteLine("Ingrese un nombre para el artículo:");
-            string nombre = Console.ReadLine()!;
-            decimal precio = PedirNumero("Ingrese un precio para el articulo:");
-            AceptarArticulo(categoria, nombre, precio);
-            // }
+            if (categoria != "Cancelar")
+            {
+                TextoColor("yellow", $"Categoría elegida: {categoria}");
+                Console.WriteLine("Ingrese un nombre para el artículo:");
+                string nombre = Console.ReadLine()!;
+                decimal precio = PedirNumero("Ingrese un precio para el articulo:", 10);
+                AceptarArticulo(categoria, nombre, precio);
+            }
+            AdministrarProductos();
         }
         private static void AceptarArticulo(string categoria, string nombre, decimal precio)
         {
@@ -249,7 +250,7 @@ namespace ConsolaApp
             listaCategorias.Add("Cancelar");
             Console.Clear();
             Console.WriteLine("Seleccione una categoria para agregar al nuevo artículo");
-            opcion = ConstructorMenu(MostrarCategoriasNombre().ToArray());
+            opcion = ConstructorMenu(listaCategorias.ToArray());
             string categoria = listaCategorias[opcion];
             //if (opcion != listaCategorias.Count - 1)
             //{
@@ -360,11 +361,11 @@ namespace ConsolaApp
             bool flag = false;
             do
             {
-                opcion = PedirNumero("Seleccione una opcion del menú");
+                opcion = PedirNumero("Seleccione una opcion del menú", opciones);
                 flag = true;
                 if (opcion > opciones - 1) flag = false;
                 //{
-                  
+
                 //}
                 //else
                 //{
@@ -413,7 +414,7 @@ namespace ConsolaApp
             Console.WriteLine(mensaje);
             Console.ForegroundColor = ConsoleColor.White;
         }
-        private static int PedirNumero(string titulo)
+        private static int PedirNumero(string titulo, int opciones)
         {
             bool flag = false;
             int numero = 0;
@@ -421,8 +422,16 @@ namespace ConsolaApp
             {
                 try
                 {
-                    Console.WriteLine(titulo);                 
-                    numero = int.Parse(Console.ReadLine()!);
+                    if (opciones > 9)
+                    {
+                        Console.WriteLine(titulo);
+                        numero = int.Parse(Console.ReadLine()!);
+                    }
+                    else
+                    {
+                        ConsoleKeyInfo key = Console.ReadKey();
+                        numero = int.Parse($"{key.KeyChar}");
+                    }
                     flag = true;
                 }
                 catch (Exception)
