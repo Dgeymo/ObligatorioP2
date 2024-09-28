@@ -65,8 +65,7 @@ namespace Dominio.Entidades
         {
             if (string.IsNullOrEmpty(Nombre) ||
                  Usuario == null ||
-                 string.IsNullOrEmpty(FechaPublicacion.ToString())) //||
-                 //string.IsNullOrEmpty(Oferta.ToString()))
+                 string.IsNullOrEmpty(FechaPublicacion.ToString()))
             {
                 throw new Exception("Datos incorrectos al intentar ingresar la PUBLICACIÓN.");
             }

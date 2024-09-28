@@ -21,7 +21,7 @@ namespace Dominio.Entidades
 
         public override string ToString()
         {
-            return $"Id : {Id}\nNombre : {Nombre.ToUpper()}\nPrecio : {Precio}\nCategorias : {UnaCategoria}\n";
+            return $"Id : {Id}\nNombre : {Nombre.ToUpper()}\nPrecio : {Precio}\nCategoria : {UnaCategoria.Nombre}\n";
         }
 
         public void Validar()

@@ -54,7 +54,7 @@ namespace ConsolaApp
         {
             Console.Clear();
             Console.WriteLine("PUBLICACIONES");
-            string[] opciones = ["Todas las publicaciones", "Ventas", "Subastas", "Ofertas de las SUBASTAS","Volver"];
+            string[] opciones = ["Todas las publicaciones", "Ventas", "Subastas", "Ofertas de las SUBASTAS", "Volver"];
             int opcion = ConstructorMenu(opciones);
             switch (opcion)
             {
@@ -248,7 +248,7 @@ namespace ConsolaApp
                 TextoColor("yellow", "Cancelado. Campo Categorias/Nombre vacias o precio incorrecto. Presione cualquier tecla para continuar...");
                 Console.ReadKey();
                 AdministrarArticulos();
-            }
+            }            
         }
         private static string SeleccionarCategorias(List<Categoria> categorias)
         {
@@ -259,15 +259,6 @@ namespace ConsolaApp
             Console.WriteLine("Seleccione una categoria para agregar al nuevo artículo");
             opcion = ConstructorMenu(listaCategorias.ToArray());
             string categoria = listaCategorias[opcion];
-            //if (opcion != listaCategorias.Count - 1)
-            //{
-            //    Categoria unaCategoria = _sistema.BuscarCategoria(categoria);
-            //    categorias.Add(unaCategoria.Nombre);
-            //}
-            //else
-            //{
-            //    AdministrarCategorias();
-            //}
             return categoria;
         }
         //Bloque de muestra de listas como strings
@@ -341,7 +332,7 @@ namespace ConsolaApp
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Has salido del sistema...\n-> Presiona cualquier tecla para cerrar esta ventanta");
             Console.ForegroundColor = ConsoleColor.White;
-            lista.Clear();
+            lista.Clear();            
         }
         private static void EnConstruccion()
         {
