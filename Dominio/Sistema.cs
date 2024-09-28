@@ -97,7 +97,9 @@ namespace Dominio
             AgregarPublicacion(new Venta("Mantente en forma", Estado.ABIERTA,
                BuscarUsuario("dgeymonat84@gmail.com"), false, new List<Articulo> {BuscarArticulo(45), BuscarArticulo(38),
                BuscarArticulo(25)}, FechaRandom()));
-            AgregarPublicacion(new Venta("Sal de tu casa", Estado.ABIERTA, BuscarUsuario("dgeymonat84@gmail.com"), false, new List<Articulo> { BuscarArticulo(42), BuscarArticulo(25), BuscarArticulo(20), BuscarArticulo(45) }, FechaRandom()));
+            AgregarPublicacion(new Venta("Sal de tu casa", Estado.ABIERTA,
+               BuscarUsuario("dgeymonat84@gmail.com"), false, new List<Articulo> { BuscarArticulo(42), BuscarArticulo(25),
+               BuscarArticulo(20), BuscarArticulo(45) }, FechaRandom()));
             AgregarPublicacion(new Venta("Luce el mejor look", Estado.ABIERTA,
                BuscarUsuario("dgeymonat84@gmail.com"), false, new List<Articulo> {BuscarArticulo(26), BuscarArticulo(48),
                BuscarArticulo(17), BuscarArticulo(9)}, FechaRandom()));
@@ -131,7 +133,6 @@ namespace Dominio
             unaPublicacion.CargarOferta(new Oferta(BuscarUsuario("ernaldo.rodriguez.dev1@gmail.com"), 1334));
             unaPublicacion.CargarOferta(new Oferta(BuscarUsuario("dgeymonat84@gmail.com"), 256));
         }
-
         public static DateTime FechaRandom()
         {
             bool flag = false;
@@ -193,9 +194,6 @@ namespace Dominio
             }
             return null!;
         }
-
-
-
         public List<Usuario> MostrarUsuarios(bool admin)
         {
             List<Usuario> unaLista = new List<Usuario>();
@@ -323,21 +321,6 @@ namespace Dominio
             }
         }
 
-
-
-        //public object Obtener(List<object> lista, Categoria parametro, Categoria valor)
-        //{
-        //    //if (valor == null || lista == null) throw new ArgumentException("Parámetros inválidos"));
-
-        //    //foreach (var obj in lista)
-        //    //{
-        //    //    if (obj != null && obj.GetType().GetProperty(parametro) != null &&
-        //    //        obj.GetType().GetProperty(parametro).GetValue(obj) == valor)
-        //    //    {
-        //    //        return obj;
-        //    //    }
-        //    //}
-        //    return null;
-        //}
+                
     }
 }
