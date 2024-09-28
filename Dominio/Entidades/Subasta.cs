@@ -27,7 +27,15 @@ namespace Dominio.Entidades
             //    }
             //} 
             return respuesta;
-        }        
+        }
+        
+        public void MostrarOfertas()
+        {
+            foreach(Oferta oferta in _ofertas)
+            {
+                Console.WriteLine(oferta.ToString());
+            }
+        }
         public void CargarOferta(Oferta oferta)
         {
             if (oferta == null) throw new Exception("Parametro incorrecto para crear una oferta");

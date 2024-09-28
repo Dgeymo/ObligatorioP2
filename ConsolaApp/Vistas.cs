@@ -54,8 +54,8 @@ namespace ConsolaApp
         {
             Console.Clear();
             Console.WriteLine("PUBLICACIONES");
-            string[] opciones = ["Todas las publicaciones", "Ventas", "Subastas", "Volver"];
-            int opcion = ConstructorMenu(["Todas las publicaciones", "Ventas", "Subastas", "Volver"]);
+            string[] opciones = ["Todas las publicaciones", "Ventas", "Subastas", "Ofertas de las SUBASTAS","Volver"];
+            int opcion = ConstructorMenu(opciones);
             switch (opcion)
             {
                 case 0:
@@ -77,11 +77,30 @@ namespace ConsolaApp
                     ListarPublicaciones();
                     break;
                 case 3:
+                    OfertasSubastas();
+                    break;
+                case 4:
                     AdministrarPublicaciones();
                     break;
                 default:
                     break;
             }
+        }
+        private static void OfertasSubastas()
+        {
+            Console.Clear();
+            List<Publicacion> ventas = _sistema.ListaPublicaciones("SUBASTA", Estado.ABIERTA);
+            List<string> nombres = new List<string>();
+            foreach (Publicacion item in ventas)
+            {
+                nombres.Add(item.Nombre);
+            }
+            nombres.Add("Volver");
+            int opcion = ConstructorMenu(nombres.ToArray());
+            if (opcion == nombres.Count - 1) ListarPublicaciones();
+            Subasta publicacion = ventas[opcion] as Subasta;
+            publicacion.MostrarOfertas();
+
         }
         private static void VerPublicaciones(string titulo, string tipo, Estado estado)
         {
