@@ -3,7 +3,7 @@ using Dominio.Interfaces;
 
 namespace Dominio.Entidades
 {
-    public abstract class Usuario:IValidable
+    public abstract class Usuario : IValidable
     {
         public int Id { get; set; }
         public string Nombre { get; set; }
@@ -16,19 +16,29 @@ namespace Dominio.Entidades
         {
             set { _password = value; }
         }
-        public Usuario( string nombre, string apellido, string email, string password)
+        public Usuario(string nombre,
+                       string apellido,
+                       string email,
+                       string password)
         {
             Id = _ultimoId++;
             Nombre = nombre;
             Apellido = apellido;
             Email = email;
-            _password = password;           
+            _password = password;
         }
 
         public virtual void Validar()
         {
-           //todo:falta Validar
+            if (string.IsNullOrEmpty(Nombre) || string.IsNullOrEmpty(Apellido) || string.IsNullOrEmpty(Email) ||
+                     string.IsNullOrEmpty(_password))
+                throw new Exception("Nombre, Apellido, Mail y Pasword no pueden estar vacios.");
+            ValidarPassword(_password);
         }
-        public abstract override string ToString();     
-      }
+        public void ValidarPassword(string password)
+        {
+
+        }
+        public abstract override string ToString();
+    }
 }

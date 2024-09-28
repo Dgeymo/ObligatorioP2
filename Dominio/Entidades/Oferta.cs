@@ -8,21 +8,21 @@ namespace Dominio.Entidades
         public int Id { get; set; }
         private static int _ultimoId;
         public decimal Precio { get; set; }
-        private Usuario _usuario;
+        public Cliente Usuario;
         public DateTime Fecha { get; set; }
 
-        public Oferta(Usuario usuario, decimal precio)
+        public Oferta(Cliente usuario, decimal precio)
         {
             Id = _ultimoId++;
-            _usuario = usuario;
+            Usuario = usuario;
             Precio = precio;
             Fecha = DateTime.Now;
         }
         public override string ToString()
         {
             return $"Id Oferta: {Id}\nDatos del Oferente:\n\t" + 
-                   $"Nombre: {_usuario.Nombre} {_usuario.Apellido}\n\t" + 
-                   $"Email: {_usuario.Email}\nMonto de la puja: ${Precio}\nRealizado el: {Fecha}\n\n";
+                   $"Nombre: {Usuario.Nombre} {Usuario.Apellido}\n\t" + 
+                   $"Email: {Usuario.Email}\nMonto de la puja: ${Precio}\nRealizado el: {Fecha}\n\n";
         }
         public void Validar()
         {

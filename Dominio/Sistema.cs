@@ -12,19 +12,19 @@ namespace Dominio
         public void PreCargar()
         {
             PrecargarUsuarios();
-            PrecargarCategoria();
-            PrecargarArticulo();
+            PrecargarCategorias();
+            PrecargarArticulos();
             PrecargarPublicaciones();
             PrecargarOfertas();
         }
         private void PrecargarUsuarios()
         {
-            AgregarUsuario(new Cliente("Diego", "Geymonat", "dgeymonat84@gmail.com", "Geymon4t", 135000));
-            AgregarUsuario(new Cliente("Ernaldo", "Rodriguez", "ernaldo.rodriguez.dev@gmail.com", "1234", 150000));
-            AgregarUsuario(new Administrador("Diego", "Geymonat", "dgeymonat85@gmail.com", "Geymon4t"));
-            AgregarUsuario(new Administrador("Ernaldo", "Rodriguez", "ernaldo.rodriguez.dev1@gmail.com", "1234"));
+            AgregarCliente(new Cliente("Diego", "Geymonat", "dgeymonat85@gmail.com", "Geymon4t", 135000));
+            AgregarCliente(new Cliente("Ernaldo", "Rodriguez", "ernaldo.rodriguez.dev@gmail.com", "1234", 150000));
+            AgregarAdministrador(new Administrador("Diego", "Geymonat", "dgeymonat84@gmail.com", "Geymon4t"));
+            AgregarAdministrador(new Administrador("Ernaldo", "Rodriguez", "ernaldo.rodriguez.dev1@gmail.com", "1234"));
         }
-        private void PrecargarCategoria()
+        private void PrecargarCategorias()
         {
             AgregarCategoria(new Categoria("Deportes", "Todo lo necesario para el deporte"));
             AgregarCategoria(new Categoria("Indumentaria", "Distintas prendas para distintas ocasiones"));
@@ -35,7 +35,7 @@ namespace Dominio
             AgregarCategoria(new Categoria("Entretenimiento", "Para tu tiempo libre"));
             AgregarCategoria(new Categoria("Educación", "Para crecer y aprender"));
         }
-        private void PrecargarArticulo()
+        private void PrecargarArticulos()
         {
             AgregarArticulo(new Articulo("Zapatillas de correr", BuscarCategoria("Indumentaria"), 80));
             AgregarArticulo(new Articulo("Camiseta de fútbol", BuscarCategoria("Indumentaria"), 25));
@@ -92,48 +92,48 @@ namespace Dominio
         {
             //VENTAS
             AgregarPublicacion(new Venta("Verano en la Playa", Estado.ABIERTA,
-               BuscarUsuario("dgeymonat84@gmail.com"), false, new List<Articulo> {BuscarArticulo(20), BuscarArticulo(25),
+               BuscarAdministrador("dgeymonat84@gmail.com"), new List<Articulo> {BuscarArticulo(20), BuscarArticulo(25),
                BuscarArticulo(42), BuscarArticulo(38)}, FechaRandom()));
             AgregarPublicacion(new Venta("Mantente en forma", Estado.ABIERTA,
-               BuscarUsuario("dgeymonat84@gmail.com"), false, new List<Articulo> {BuscarArticulo(45), BuscarArticulo(38),
+               BuscarAdministrador("dgeymonat84@gmail.com"), new List<Articulo> {BuscarArticulo(45), BuscarArticulo(38),
                BuscarArticulo(25)}, FechaRandom()));
             AgregarPublicacion(new Venta("Sal de tu casa", Estado.ABIERTA,
-               BuscarUsuario("dgeymonat84@gmail.com"), false, new List<Articulo> { BuscarArticulo(42), BuscarArticulo(25),
+               BuscarAdministrador("dgeymonat84@gmail.com"), new List<Articulo> { BuscarArticulo(42), BuscarArticulo(25),
                BuscarArticulo(20), BuscarArticulo(45) }, FechaRandom()));
             AgregarPublicacion(new Venta("Luce el mejor look", Estado.ABIERTA,
-               BuscarUsuario("dgeymonat84@gmail.com"), false, new List<Articulo> {BuscarArticulo(26), BuscarArticulo(48),
+               BuscarAdministrador("dgeymonat84@gmail.com"), new List<Articulo> {BuscarArticulo(26), BuscarArticulo(48),
                BuscarArticulo(17), BuscarArticulo(9)}, FechaRandom()));
             AgregarPublicacion(new Venta("Mantente saludable", Estado.ABIERTA,
-               BuscarUsuario("dgeymonat84@gmail.com"), false, new List<Articulo> {BuscarArticulo(46), BuscarArticulo(13),
+               BuscarAdministrador("dgeymonat84@gmail.com"), new List<Articulo> {BuscarArticulo(46), BuscarArticulo(13),
                BuscarArticulo(7)}, FechaRandom()));
             AgregarPublicacion(new Venta("Para cuidar tu cuerpo", Estado.CERRADA,
-               BuscarUsuario("dgeymonat84@gmail.com"), false, new List<Articulo> {BuscarArticulo(43), BuscarArticulo(35),
+               BuscarAdministrador("dgeymonat84@gmail.com"), new List<Articulo> {BuscarArticulo(43), BuscarArticulo(35),
                BuscarArticulo(2), BuscarArticulo(32)}, FechaRandom()));
             AgregarPublicacion(new Venta("Para quedarte en casa", Estado.CANCELADA,
-               BuscarUsuario("dgeymonat84@gmail.com"), false, new List<Articulo> {BuscarArticulo(41), BuscarArticulo(8),
+               BuscarAdministrador("dgeymonat84@gmail.com"), new List<Articulo> {BuscarArticulo(41), BuscarArticulo(8),
                BuscarArticulo(10)}, FechaRandom()));
             AgregarPublicacion(new Venta("Cultiva tu mente", Estado.ABIERTA,
-               BuscarUsuario("dgeymonat84@gmail.com"), false, new List<Articulo> {BuscarArticulo(31), BuscarArticulo(49),
+               BuscarAdministrador("dgeymonat84@gmail.com"), new List<Articulo> {BuscarArticulo(31), BuscarArticulo(49),
                BuscarArticulo(24), BuscarArticulo(5)}, FechaRandom()));
             AgregarPublicacion(new Venta("Mantente actualizado", Estado.ABIERTA,
-               BuscarUsuario("dgeymonat84@gmail.com"), false, new List<Articulo> {BuscarArticulo(28), BuscarArticulo(22),
+               BuscarAdministrador("dgeymonat84@gmail.com"), new List<Articulo> {BuscarArticulo(28), BuscarArticulo(22),
                BuscarArticulo(12), BuscarArticulo(3)}, FechaRandom()));
             AgregarPublicacion(new Venta("Lo que no te puede faltar", Estado.ABIERTA,
-               BuscarUsuario("dgeymonat84@gmail.com"), false, new List<Articulo> {BuscarArticulo(17), BuscarArticulo(9),
+               BuscarAdministrador("dgeymonat84@gmail.com"), new List<Articulo> {BuscarArticulo(17), BuscarArticulo(9),
                BuscarArticulo(1), BuscarArticulo(0)}, FechaRandom()));
 
             //SUBASTAS
             AgregarPublicacion(new Subasta("Verano en la Playa", Estado.ABIERTA,
-               BuscarUsuario("dgeymonat84@gmail.com"), false, new List<Articulo> {BuscarArticulo(4), BuscarArticulo(6),
+               BuscarAdministrador("dgeymonat84@gmail.com"), new List<Articulo> {BuscarArticulo(4), BuscarArticulo(6),
                BuscarArticulo(9), BuscarArticulo(45)}, FechaRandom()));
         }
         private void PrecargarOfertas()
         {
             Subasta unaPublicacion = BuscarPublicacionSubasta(10);
-            unaPublicacion.CargarOferta(new Oferta(BuscarUsuario("ernaldo.rodriguez.dev1@gmail.com"), 1334));
-            unaPublicacion.CargarOferta(new Oferta(BuscarUsuario("dgeymonat84@gmail.com"), 256));
+            unaPublicacion.CargarOferta(new Oferta(BuscarCliente("ernaldo.rodriguez.dev@gmail.com"), 1334));
+            unaPublicacion.CargarOferta(new Oferta(BuscarCliente("dgeymonat85@gmail.com"), 256));
         }
-        public static DateTime FechaRandom()
+        private static DateTime FechaRandom()
         {
             bool flag = false;
             DateTime fecha;
@@ -151,14 +151,26 @@ namespace Dominio
         }
         #endregion
 
-        public Usuario BuscarUsuario(string email)
+        public Cliente BuscarCliente(string email)
+        {
+            if (String.IsNullOrEmpty(email)) throw new Exception("No se ha cargado el email en el parametro");
+            foreach (Cliente unUsuario in _usuarios)
+            {
+                if (unUsuario.Email == email)
+                {
+                    return unUsuario;
+                }
+            }
+            return null!;
+        }
+        public Administrador BuscarAdministrador(string email)
         {
             if (String.IsNullOrEmpty(email)) throw new Exception("No se ha cargado el email en el parametro");
             foreach (Usuario unUsuario in _usuarios)
             {
                 if (unUsuario.Email == email)
                 {
-                    return unUsuario;
+                    return (Administrador)unUsuario;
                 }
             }
             return null!;
@@ -295,32 +307,24 @@ namespace Dominio
             nuevaCategoria.Validar();
             _categorias.Add(nuevaCategoria);
         }
-        public void AgregarUsuario(Usuario nuevoUsuario)
+        public void AgregarCliente(Cliente nuevoUsuario)
         {
             if (nuevoUsuario == null) throw new Exception("Valor nulo en el parametro de agregar usuario");
             nuevoUsuario.Validar();
-            if (BuscarUsuario(nuevoUsuario.Email) != null) throw new Exception("El usuario ya existe");
+            if (BuscarCliente(nuevoUsuario.Email) != null) throw new Exception("El usuario ya existe");
+            _usuarios.Add(nuevoUsuario);
+        }
+        public void AgregarAdministrador(Administrador nuevoUsuario)
+        {
+            if (nuevoUsuario == null) throw new Exception("Valor nulo en el parametro de agregar usuario");
+            nuevoUsuario.Validar();
+            if (BuscarAdministrador(nuevoUsuario.Email) != null) throw new Exception("El usuario ya existe");
             _usuarios.Add(nuevoUsuario);
         }
         /// <summary>
         /// ESTE METODO NO VA A INCLUIRSE EN EL PROYECTO FINAL. ES A MODO DE VER LOS REGISTROS DE CATEGORIA Y ARTICULOS INGRESADOS
         /// </summary>
-        public void MostrarPrecargas()
-        {
-            for (int i = 0; i < _categorias.Count; i++)
-            {
-                Console.WriteLine(_categorias[i]);
-            }
-            for (int i = 0; i < _articulos.Count; i++)
-            {
-                Console.WriteLine(_articulos[i]);
-            }
-            for (int i = 0; i < _usuarios.Count; i++)
-            {
-                Console.WriteLine(_usuarios[i]);
-            }
-        }
 
-                
+
     }
 }

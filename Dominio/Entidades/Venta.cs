@@ -2,11 +2,10 @@
 {
     public class Venta : Publicacion
     {
-        public bool Oferta = false;
+        public bool Oferta {get;set;}
         public Venta(string nombre,
                         Estado estado,
-                        Usuario usuario,
-                        bool oferta,
+                        Administrador usuario,
                         List<Articulo> articulos,
                         DateTime fechaPublicacion) : base(nombre,
                                                            estado,
@@ -14,13 +13,7 @@
                                                            articulos,
                                                            fechaPublicacion)
         {
-            Oferta = oferta;
-        }
-        public override string ToString()
-        {
-            string respuesta = base.ToString();
-            respuesta += $"Tipo: Venta\n";
-            return respuesta;
+            Oferta = false;
         }
     }
 }

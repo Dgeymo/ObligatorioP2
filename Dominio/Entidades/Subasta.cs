@@ -7,28 +7,13 @@ namespace Dominio.Entidades
         private List<Oferta> _ofertas = new List<Oferta>();
         public Subasta(string nombre,
                        Estado estado,
-                       Usuario usuario,
-                       bool oferta,
+                       Administrador usuario,
                        List<Articulo> articulos,
                        DateTime fechaPublicacion
                      ) : base(nombre, estado, usuario, articulos,fechaPublicacion)
         {
         }
-        public override string ToString()
-        {
-            string respuesta = base.ToString();
-            respuesta += $"Tipo: Subasta\n";
-            //if (_ofertas.Count > 0)
-            //{
-            //    respuesta += "\nOFERTAS:\n";
-            //    foreach (Oferta unaOferta in _ofertas)
-            //    {
-            //        respuesta += unaOferta.ToString();
-            //    }
-            //} 
-            return respuesta;
-        }
-        
+
         public List<Oferta> MostrarOfertas()
         {
             return _ofertas;

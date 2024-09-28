@@ -1,4 +1,6 @@
-﻿namespace Dominio.Entidades
+﻿using Dominio.Interfaces;
+
+namespace Dominio.Entidades
 {
     public class Administrador : Usuario
     {
@@ -13,5 +15,6 @@
         {          
             return $"Id: {Id}\nNombre: {Nombre}\nApellido: {Apellido}\nEmail: {Email}\nTipo: Administrador";         
         }
+
     }
 }

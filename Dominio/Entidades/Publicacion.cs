@@ -13,12 +13,12 @@ namespace Dominio.Entidades
         public DateTime FechaPublicacion { get; set; }
         public DateTime FechaFinalizado { get; set; }
         public Estado EstadoPublicacion { get; set; }
-        public Usuario Usuario { get; set; }
+        public Administrador Usuario { get; set; }
+        public Cliente UsuarioComprador { get; set; }
 
-   
         public Publicacion(string nombre,
                         Estado estado,
-                        Usuario usuario,                     
+                        Administrador usuario,                     
                         List<Articulo> articulos,
                         DateTime fechaPublicacion)
         {
