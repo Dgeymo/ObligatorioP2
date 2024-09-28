@@ -200,13 +200,16 @@ namespace ConsolaApp
                 decimal precio = PedirNumero("Ingrese un precio para el articulo:", 10);
                 AceptarArticulo(categoria, nombre, precio);
             }
+            else
+            {
             AdministrarProductos();
+            }
         }
         private static void AceptarArticulo(string categoria, string nombre, decimal precio)
         {
             Console.Clear();
             Console.WriteLine("CONFIRMAR ARTICULO NUEVO");
-            TextoColor("yellow",$"\nNOMBRE : {nombre.ToUpper()}\nPRECIO : {precio}\nCATEGORIA : {categoria}\n");
+            TextoColor("yellow", $"\nNOMBRE : {nombre.ToUpper()}\nPRECIO : {precio}\nCATEGORIA : {categoria}\n");
             int opcion = ConstructorMenu(["ACEPTAR", "CANCELAR"]);
             if (opcion == 0 && !string.IsNullOrEmpty(nombre) && precio > 0) //&& categorias.Count > 0
             {
@@ -215,7 +218,7 @@ namespace ConsolaApp
                 Console.ReadKey();
                 AdministrarProductos();
             }
-            else if (opcion == 1 && !string.IsNullOrEmpty(nombre) && precio > 0) // && categorias.Count > 0
+            else if (opcion != 0 && !string.IsNullOrEmpty(nombre) && precio > 0) // && categorias.Count > 0
             {
                 TextoColor("yellow", "Cancelado. Presione cualquier tecla para continuar...");
                 Console.ReadKey();
