@@ -77,7 +77,7 @@ namespace Dominio
             //Deportes
             //Indumentaria
             //Salud
-            //Tecnología
+            //Tecnología 
             //Niños
             //Hogar
             //Educación
