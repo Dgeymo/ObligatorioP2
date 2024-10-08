@@ -165,10 +165,10 @@ namespace Dominio
             AgregarPublicacion(new Venta("Mantente saludable", Estado.ABIERTA,
                BuscarAdministrador("dgeymonat84@gmail.com"), new List<Articulo> {BuscarArticulo(46), BuscarArticulo(13),
                BuscarArticulo(7)}, FechaRandom()));
-            AgregarPublicacion(new Venta("Para cuidar tu cuerpo", Estado.CERRADA,
+            AgregarPublicacion(new Venta("Para cuidar tu cuerpo", Estado.ABIERTA,
                BuscarAdministrador("dgeymonat84@gmail.com"), new List<Articulo> {BuscarArticulo(43), BuscarArticulo(35),
                BuscarArticulo(2), BuscarArticulo(32)}, FechaRandom()));
-            AgregarPublicacion(new Venta("Para quedarte en casa", Estado.CANCELADA,
+            AgregarPublicacion(new Venta("Para quedarte en casa", Estado.ABIERTA,
                BuscarAdministrador("dgeymonat84@gmail.com"), new List<Articulo> {BuscarArticulo(41), BuscarArticulo(8),
                BuscarArticulo(10)}, FechaRandom()));
             AgregarPublicacion(new Venta("Cultiva tu mente", Estado.ABIERTA,
@@ -197,10 +197,10 @@ namespace Dominio
             AgregarPublicacion(new Subasta("Mantente saludable", Estado.ABIERTA,
                BuscarAdministrador("dgeymonat84@gmail.com"), new List<Articulo> {BuscarArticulo(46), BuscarArticulo(13),
                BuscarArticulo(7)}, FechaRandom()));
-            AgregarPublicacion(new Subasta("Para cuidar tu cuerpo", Estado.CERRADA,
+            AgregarPublicacion(new Subasta("Para cuidar tu cuerpo", Estado.ABIERTA,
                BuscarAdministrador("dgeymonat84@gmail.com"), new List<Articulo> {BuscarArticulo(43), BuscarArticulo(35),
                BuscarArticulo(2), BuscarArticulo(32)}, FechaRandom()));
-            AgregarPublicacion(new Subasta("Para quedarte en casa", Estado.CANCELADA,
+            AgregarPublicacion(new Subasta("Para quedarte en casa", Estado.ABIERTA,
                BuscarAdministrador("dgeymonat84@gmail.com"), new List<Articulo> {BuscarArticulo(41), BuscarArticulo(8),
                BuscarArticulo(10)}, FechaRandom()));
             AgregarPublicacion(new Subasta("Cultiva tu mente", Estado.ABIERTA,
@@ -358,7 +358,7 @@ namespace Dominio
             if (string.IsNullOrEmpty(tipo)) throw new Exception("No se ha cargado el tipo en el parametro");
             List<Publicacion> publicaciones = new List<Publicacion>();
 
-            foreach (Publicacion unaPublicacion in _publicaciones) //.nombre == tipo.ToUpper())
+            foreach (Publicacion unaPublicacion in _publicaciones)
             {
                 if (tipo.ToUpper() == "TODOS")
                 {
@@ -446,11 +446,6 @@ namespace Dominio
             nuevoUsuario.Validar();
             if (BuscarAdministrador(nuevoUsuario.Email) != null) throw new Exception("El usuario ya existe");
             _usuarios.Add(nuevoUsuario);
-        }
-        /// <summary>
-        /// ESTE METODO NO VA A INCLUIRSE EN EL PROYECTO FINAL. ES A MODO DE VER LOS REGISTROS DE CATEGORIA Y ARTICULOS INGRESADOS
-        /// </summary>
-
-
+        }      
     }
 }

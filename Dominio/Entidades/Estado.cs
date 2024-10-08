@@ -2,9 +2,9 @@
 {
     public enum Estado
     {
+        TODOS = -1,
         ABIERTA = 0,
         CERRADA = 1,
-        CANCELADA = 2,
-        TODOS = 3
+        CANCELADA = 2
     }
 }
