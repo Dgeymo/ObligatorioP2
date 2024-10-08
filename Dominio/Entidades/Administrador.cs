@@ -2,7 +2,7 @@
 
 namespace Dominio.Entidades
 {
-    public class Administrador : Usuario
+    public class Administrador : Usuario,IValidable
     {
         public Administrador(
            string nombre,
@@ -14,6 +14,10 @@ namespace Dominio.Entidades
         public override string ToString()
         {          
             return $"Id: {Id}\nNombre: {Nombre}\nApellido: {Apellido}\nEmail: {Email}\nTipo: Administrador";         
+        }
+        public override void Validar()
+        {
+            base.Validar();
         }
 
     }
