@@ -1,6 +1,8 @@
-﻿namespace Dominio.Entidades
+﻿using Dominio.Interfaces;
+
+namespace Dominio.Entidades
 {
-    public class Venta : Publicacion
+    public class Venta : Publicacion, IValidable
     {
         public bool Oferta {get;set;}
         public Venta(string nombre,
@@ -14,6 +16,10 @@
                                                            fechaPublicacion)
         {
             Oferta = false;
+        }
+        public override void Validar()
+        {
+            base.Validar();
         }
     }
 }

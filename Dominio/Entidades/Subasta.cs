@@ -2,7 +2,7 @@
 
 namespace Dominio.Entidades
 {
-    public class Subasta : Publicacion
+    public class Subasta : Publicacion,IValidable
     {
         private List<Oferta> _ofertas = new List<Oferta>();
         public Subasta(string nombre,
@@ -23,6 +23,10 @@ namespace Dominio.Entidades
             if (oferta == null) throw new Exception("Parametro incorrecto para crear una oferta");
             oferta.Validar();
             _ofertas.Add(oferta);
+        }
+        public override void Validar()
+        {
+            base.Validar();
         }
     }
 }
