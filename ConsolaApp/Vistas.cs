@@ -93,31 +93,20 @@ namespace ConsolaApp
 
         private static void ListarEntreFechas()
         {
-            List<Publicacion> publicaciones = new List<Publicacion>(_sistema.ListaPublicaciones("TODOS", Estado.TODOS));
             Console.Clear();
             Console.WriteLine("Filtrar Publicaciones entre dos fechas.");
             Console.WriteLine("Ingrese una fecha de inicio (DD/MM/YYYY).");
             DateTime fechaIncio = ObtenerFecha();
             Console.WriteLine("Ingrese una fecha final (DD/MM/YYYY).");
             DateTime fechaFinal = ObtenerFecha();
-            DateTime fechaMayor = fechaIncio;
-            if (fechaIncio > fechaFinal)
-            {
-                fechaIncio = fechaFinal;
-                fechaFinal = fechaMayor;
-            }
-            int contador = 0;
+            List<Publicacion> publicaciones = new List<Publicacion>(_sistema.BuscarPublicacionEntreFecha(fechaIncio, fechaFinal));
             foreach (Publicacion publicacion in publicaciones)
             {
-                if (publicacion.FechaPublicacion >= fechaIncio && publicacion.FechaPublicacion <= fechaFinal)
-                {
-                    contador++;
-                    string tipo = publicacion.GetType().Name;
-                    Console.WriteLine($"ID: {publicacion.Id}\nTIPO: {tipo}\nESTADO: {publicacion.EstadoPublicacion}\n" +
-                        $"FECHA DE PUBLICACION: {publicacion.FechaPublicacion.ToShortDateString()}\n");
-                }
+                string tipo = publicacion.GetType().Name;
+                Console.WriteLine($"ID: {publicacion.Id}\nTIPO: {tipo}\nESTADO: {publicacion.EstadoPublicacion}\n" +
+                    $"FECHA DE PUBLICACION: {publicacion.FechaPublicacion.ToShortDateString()}\n");
             }
-            if ( contador == 0 ) TextoColor("yellow", $"No hay Publicaciones entre {fechaIncio.ToShortDateString()} y " +
+            if (publicaciones.Count == 0) TextoColor("yellow", $"No hay Publicaciones entre {fechaIncio.ToShortDateString()} y " +
                 $"{fechaFinal.ToShortDateString()}");
             TextoColor("yellow", "Presione cualquier tecla para continuar...");
             Console.ReadKey();

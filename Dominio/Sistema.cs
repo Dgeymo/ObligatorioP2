@@ -396,6 +396,24 @@ namespace Dominio
             }
             return publicaciones;
         }
+        public List<Publicacion> BuscarPublicacionEntreFecha(DateTime fecha1, DateTime fecha2)
+        {
+            DateTime fechaMayor = fecha1;
+            if (fecha1> fecha2)
+            {
+                fecha1 = fecha2;
+                fecha2 = fechaMayor;
+            }
+            List<Publicacion> publicaciones = new List<Publicacion>();
+            foreach (Publicacion publicacion in _publicaciones)
+            {
+                if (publicacion.FechaPublicacion >= fecha1 && publicacion.FechaPublicacion <= fecha2)
+                {
+                    publicaciones.Add(publicacion);
+                }
+            }
+            return publicaciones;
+        }
         public List<Articulo> MostrarArticulos(string categoria)
         {
             List<Articulo> resultado = new List<Articulo>();
